@@ -1,11 +1,424 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import MainLayout from '../layouts/MainLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ExperienceItem from '../components/ExperienceItem.astro';
+import CourseCard from '../components/CourseCard.astro';
+import ProjectModal from '../components/ProjectModal.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+
+import { Image } from 'astro:assets';
+import bryanSuit from '../assets/img/Bryan_Suit.jpg';
+import facingForward from '../assets/img/Facing_forward.jpg';
+
+
+const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
+
+const myProjects = [
+    {
+        id: "campus-hub", // Add a unique ID for each
+        title: "SJU Campus Hub",
+        video: "/videos/campus-hub-demo.mp4",
+        description:  `Winner of the St. John's Track for St. John's Hacks 2025. A centralized platform designed to connect all events of St. John's University in one place.
+                        Provides information about campus activities, club events, and study groups.`,
+        fullDescription: `A centralized platform designed to connect all events of St. John's University in one place. 
+                      Provides information about campus activities, club events, and study groups.
+                      Built in a team of 3 using HTML/CSS and JavaScript, and deployed on Vercel.
+                      Our Motto is Building for a Better Student Life!`,
+        link: "https://github.com/Keepas3/SJU-Campus-Hub",
+        techStack: "HTML/CSS | JavaScript | Vercel",
+        award: "1st Place - SJU Hacks"
+    },
+    {
+        id: "adapt-iq", // Add a unique ID for each
+        title: "AdaptIQ",
+        video: "/videos/adapt-iq-demo.mp4",
+        description: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
+                      Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.`,
+        fullDescription: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
+                      Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.
+                      Built in a team of 3 using Tailwind CSS, PowerPoint API, OpenAI API, and TypeScript.`,
+        link: "https://github.com/Keepas3/adapt-iq",
+        techStack: "Tailwind CSS | Tavily API | TypeScript | OpenAI API",
+        award: "3rd Place - SJU Hacks"
+    },
+    {
+        id: "dragon-bot-v2", // Add a unique ID for each
+        title: "Dragon Bot 2.0",
+        videoBot: "/videos/dragon-bot-demo.mp4",
+        videoWeb: "/videos/dragon-bot-site.mp4",
+        description: `A Discord Bot providing real-time clan tracking, smart war & raid reminders with automatic notifications. 
+                      Includes a direct feed to the latest leaks and news from Reddit.`,
+        fullDescription: `Dragon Bot 2.0 is a Discord Bot designed to provide real-time clan tracking, smart war & raid reminders with automatic notifications. 
+                      It includes a direct feed to the latest leaks and news from Reddit.
+                      Commands are designed to help users stay updated on their clan's performance and upcoming events.
+                      Built using Python, Discord API, and Railway for hosting. The web dashboard is built with Astro and Tailwind CSS.`,
+        link: "https://github.com/Keepas3/Dragon-Bot-2.0",
+        techStack: "Python | Discord API | Railway | Reddit API | Astro | Tailwind CSS"
+    },
+    {
+        id: "vcrts", 
+        title: "VCRTS",
+        video: "/videos/vcrts-demo.mp4",
+        description: `A distributed cloud computing system that leverages parked vehicles' computational resources. 
+                      Features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
+                      Built by a team of 5 developers as a capstone project.`,
+        fullDescription: `VCRTS is a distributed cloud computing system that leverages parked vehicles' computational resources. 
+                      It features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
+                      The system is designed to optimize the use of idle computational resources in parked vehicles, providing a cost-effective and scalable solution for cloud computing needs.
+                      Built by a team of 5 developers as a capstone project.`,
+        link: "https://github.com/Alegacki21/VCRTS-SWE-Project",
+        techStack: "Java | Java Swing | MYSQL"
+    },
+    // {
+    //     id: "snapnotes", 
+    //     title: "SnapNotes",
+    //     video: "/videos/snapnotes-demo.mp4",
+    //     description: `A web application that simplifies studying from word documents using LLMs. 
+    //                   Users upload files and the app generates summaries and interactive study cards with Q&A.`,
+    //     fullDescription: `SnapNotes is a web application that simplifies studying from word documents using LLMs. 
+    //                   Users can upload their study materials, and the app generates concise summaries and interactive study cards with Q&A.`,
+    //     link: "https://github.com/Keepas3/SnapNotes",
+    //     techStack: "Python | HTML/CSS | React"
+    // },
+    {
+        id: "video-recap", 
+        title: "Video Recap",
+        video: "/videos/video-recap-demo.mp4",
+        description: `Designed to condense YouTube videos into short, concise sentences for quick understanding of lengthy content. Utilizes OpenRouter AI and YouTube transcripts to generate summaries.
+                      Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.`,
+        fullDescription: `Video Recap is a web application designed to condense YouTube videos into short, concise paragraphs using OpenRouter AI and YouTube transcripts. 
+                      Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.
+                      Built using Python, OpenRouter AI, and HTML/CSS.`,
+        link: "https://github.com/Keepas3/VideoRecap-HeadStarterHackathon",
+        techStack: "Python | OpenRouterAI | HTML/CSS | Hugging Face Transformer"
+    },
+   // {
+        // id: "youtube-saver", 
+        // title: "YouTube Saver",
+        // video: "/videos/youtube-saver-demo.mp4",
+        // description: `An application designed to download YouTube videos and convert MP4 files to Flac. 
+        //               Features a clean interface for URL submissions and automated file output.`,
+        // fullDescription: `YouTube Saver is an application designed to download YouTube videos and convert MP4 files to Flac. 
+        //               It features a clean interface for URL submissions and automated file output.`,
+        // link: "https://github.com/Keepas3/YouTube-Saver",
+        // techStack: "Python | HTML/CSS | Javascript"
+  //  },
+    {
+        id: "portfolio-website", 
+        title: "Portfolio Website",
+        video: "/videos/portfolio-website-demo.mp4",
+        description: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS to showcase my work and journey as a software developer.`,
+        fullDescription: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS 
+                      to showcase my work and journey as a software developer.
+                      The video will showcase a side-by-side comparison of the old HTML/CSS version and the new Astro version.`,
+        link: "https://github.com/Keepas3/Portfolio-Website",
+        techStack: "Astro | Tailwind CSS | Vercel | JavaScript"
+    }
+];
+const experienceData = [
+    {
+        title: "Data Analyst",
+        company: "St. John's University - Facilities Department",
+        location: "Queens, NY",
+        date: "Spring 2025 - Present", // Adjust dates as needed
+        logo: "/src/assets/img/SJU_logo.png",
+        bullets: [
+            "Analyzed university data to identify cost-saving opportunities and track usage trends across multiple campuses.",
+            "Applied advanced Excel and SQL queries to optimize resource allocations and budget accuracy.",
+            "Delivered data-driven insights to assist in financial forecasting and cost-saving initiatives."
+        ]
+    },
+    {
+        title: "AI Intern",
+        company: "SJ Innovation LLC",
+        location: "New York, NY",
+        date: "Summer 2024",
+        logo: "/src/assets/img/SJ_Innovation_Logo.png",
+        bullets: [
+            "Developed an AI Powered Finance Agent providing 'buy', 'sell', or 'hold' recommendations for retail investors.",
+            "Integrated real-time financial APIs to manage historical and live market data.",
+            "Designed a recommendation system using moving averages, P/E ratios, and sentiment analysis via NLP techniques."
+        ]
+    },
+    {
+        title: "Student Employee",
+        company: "CCA USA",
+        location: "Queens, NY",
+        date: "2023 - 2024",
+        logo: "/src/assets/img/CCA_USA.png",
+        bullets: [
+            "Coordinated and distributed promotional materials for a charity animal organization.",
+            "Collaborated with team members to manage logistics and sales, raising over $2,327.",
+            "Maintained precise records of donations and inventory."
+        ]
+    }
+];
+const courses = [
+    { name: "Software Engineering", code: "CUS 1156", iconPath: "/src/assets/img/SE_icon.png" },
+    { name: "Analysis of Algorithms", code: "CUS 1168", iconPath: "/src/assets/img/algorithms_icon.png" },
+    { name: "Data Security/Cryptography", code: "CUS 1185", iconPath: "/src/assets/img/Cryptography.png" },
+    // Add more here...
+];
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+
+<MainLayout title="Bryan Fung | Software Engineer">
+    <section class="min-h-screen flex flex-col md:flex-row items-center justify-center container mx-auto px-6 gap-12">
+        <div class="reveal flex-1 text-center md:text-left">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+                Welcome,<br>I'm <span class="text-blue-600">Bryan Fung</span>
+            </h1>
+            <p class="text-xl text-slate-600 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. Currently building Snap Notes and Dragon Bot.</p>
+            <div class="mt-10 flex gap-4 justify-center md:justify-start">
+                <a 
+                    href="/Bryan_Fung_Resume.pdf" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-blue-600 shadow-xl shadow-slate-200 transition-all active:scale-95 group"
+                >
+                    <span>View Resume</span>
+                    <i class='bx bx-link-external text-lg group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'></i>
+                </a>
+                <div class="flex items-center gap-4 text-3xl">
+                    <a href="https://github.com/Keepas3" class="hover:text-blue-600"><i class='bx bxl-github'></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="reveal flex-1">
+    <Image 
+        src={bryanSuit} 
+        alt="Bryan Fung" 
+        class="rounded-3xl shadow-2xl w-full max-w-md mx-auto-0 transition-all duration-800"
+    />
+</div>
+    </section>
+    <section id="about" class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-6xl">
+        <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+            
+            <div class="reveal flex-1 w-full max-w-md">
+                <div class="relative group">
+                    <div class="absolute -inset-4 bg-blue-50 rounded-[2rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
+                    
+                    <Image 
+                        src={facingForward} 
+                        alt="Bryan Fung Portrait" 
+                        class="relative rounded-3xl shadow-xl w-full h-auto object-cover border-4 border-white"
+                    />
+                </div>
+            </div>
+
+            <div class="reveal flex-1">
+                <h2 class="text-sm font-black uppercase tracking-widest text-blue-600 mb-3">About Me</h2>
+                <h3 class="text-4xl font-bold text-slate-900 mb-6 leading-tight">
+                    Aspiring Software Developer <br class="hidden lg:block"> & Engineer based in NYC
+                </h3>
+                
+                <div class="space-y-4 text-slate-600 leading-relaxed">
+                    <p>
+                        I am eager to hone my skills and contribute to innovative projects that make a difference. 
+                        Born and raised in New York City, I developed a passion for technology that led me to 
+                        St. John's University, where I am currently a <strong>fourth-year Computer Science student</strong>.
+                    </p>
+                    <p>
+                        Outside of work and academics, I enjoy travelling, diving into a book, 
+                        or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York.
+                        I’m a big believer in staying active and using sports to keep my competitive edge sharp.
+                    </p>
+                    <p class="font-medium text-slate-900">
+                        Currently focusing on <span class="text-blue-600">Snap Notes</span> and <span class="text-blue-600">Dragon Bot</span>,
+                        projects that you can check out below. I’m always open to connecting, so feel free to reach out if you’d like to chat about potential opportunities or just want to say hi!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-2 gap-6 mt-10 border-t border-slate-100 pt-8">
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900">3.72</p>
+                        <p class="text-xs uppercase tracking-wide text-slate-400 font-bold">Current GPA</p>
+                    </div>
+                    <div>
+                        <p class="text-2xl font-bold text-slate-900">8+</p>
+                        <p class="text-xs uppercase tracking-wide text-slate-400 font-bold">Projects Built</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+    <section id="projects" class="py-24 bg-slate-100">
+        <div class="container mx-auto px-6">
+            <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 whitespace-pre-line">
+                {myProjects.map((project) => (
+                    <ProjectCard {...project} />
+                ))}
+            </div>
+        </div>
+        <div class="mt-16 text-center">
+    <a href="https://github.com/Keepas3?tab=repositories" target="_blank" class="inline-flex items-center gap-2 px-8 py-4 bg-white border border-slate-200 rounded-full font-bold text-slate-900 hover:bg-slate-50 hover:border-blue-300 transition-all group">
+        <span>View More on GitHub</span>
+        <i class='bx bxl-github text-xl group-hover:rotate-12 transition-transform'></i>
+    </a>
+</div>
+    </section>
+	<section id="experience" class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-4xl font-bold mb-16 text-center">Professional Experience</h2>
+        
+        <div class="flex flex-col">
+            {experienceData.map((item) => (
+                <ExperienceItem {...item} />
+            ))}
+        </div>
+    </div>
+    <ProjectModal />
+</section>
+
+
+
+<section id="education" class="py-24 bg-slate-50">
+    <div class="container mx-auto px-6 max-w-5xl">
+        <h2 class="text-4xl font-bold mb-16 text-center">Education</h2>
+        
+        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 mb-12 flex flex-col md:flex-row justify-between items-start gap-8">
+            <div>
+                <h3 class="text-3xl font-bold text-slate-900 mb-2">St. John's University</h3>
+                <p class="text-xl text-blue-600 font-semibold mb-4">B.S. in Computer Science</p>
+                <ul class="space-y-2 text-slate-600">
+                    <li class="flex items-center gap-2"><i class='bx bxs-star text-yellow-500'></i> GPA: 3.72</li>
+                    <li class="flex items-center gap-2"><i class='bx bxs-award text-blue-500'></i> Dean's List (6 Consecutive Semesters)</li>
+                    <li class="flex items-center gap-2"><i class='bx bxs-graduation text-slate-500'></i> Expected Graduation: May 2026</li>
+                </ul>
+            </div>
+            <div class="text-right">
+                <p class="text-slate-400 font-mono text-sm uppercase tracking-widest">Queens, NY</p>
+            </div>
+        </div>
+
+        <h3 class="text-2xl font-bold mb-8 text-slate-800">Key Coursework</h3>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {courses.map(course => (
+                <CourseCard {...course} />
+            ))}
+        </div>
+    </div>
+</section>
+<section id="contact" class="py-24 bg-white">
+    <div class="container mx-auto px-6 max-w-4xl">
+        <h2 class="text-4xl font-bold mb-4 text-center text-slate-900">Get In Touch</h2>
+        <p class="text-center text-slate-600 mb-16 max-w-2xl mx-auto">
+            I’d be happy to connect! Whether you’d like to discuss a project, 
+            inquire about my work, or simply reach out, feel free to contact me.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <a href="tel:3473251321" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <i class='bx bx-phone text-3xl'></i>
+                </div>
+                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Phone</h3>
+                <p class="text-xl font-bold text-slate-900">(347) 325-1321</p>
+            </a>
+
+            <a href="mailto:bryanfung61@gmail.com" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <i class='bx bx-envelope text-3xl'></i>
+                </div>
+                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Email</h3>
+                <p class="text-xl font-bold text-slate-900">bryanfung61@gmail.com</p>
+            </a>
+
+        </div>
+    </div>
+</section>
+
+</MainLayout>
+<script>
+  const modal = document.querySelector('#project-modal') as HTMLDialogElement;
+  const projectCards = document.querySelectorAll('.project-trigger');
+  const closeButtons = document.querySelectorAll('.close-modal');
+  const videoSwitcher = document.querySelector('#video-switcher') as HTMLElement;
+  const tabButtons = document.querySelectorAll('.video-tab-btn');
+
+  const modalTitle = document.querySelector('#modal-title');
+  const modalDesc = document.querySelector('#modal-description');
+  const modalVideo = document.querySelector('#modal-video') as HTMLVideoElement;
+  const modalVideoSource = document.querySelector('#modal-video source') as HTMLSourceElement;
+  const modalGithub = document.querySelector('#modal-github') as HTMLAnchorElement;
+
+  // We'll store the currently active card here so the tabs know where to pull data from
+  let activeCard: Element | null = null;
+
+  projectCards.forEach((card) => {
+    card.addEventListener('click', () => {
+      activeCard = card; // Set the current context
+      
+      const title = card.getAttribute('data-title') || '';
+      const fullDesc = card.getAttribute('data-full-desc') || '';
+      const githubLink = card.getAttribute('data-link') || '#';
+      
+      // Check if this project has the "Ecosystem" videos
+      const videoBot = card.getAttribute('data-video-bot');
+      const videoWeb = card.getAttribute('data-video-web');
+      const defaultVideo = card.getAttribute('data-video') || videoBot || '';
+
+      // 1. Toggle Switcher Visibility
+      if (videoSwitcher) {
+        // Only show the tabs if BOTH video types exist
+        videoSwitcher.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
+      }
+
+      // 2. Inject basic data
+      if (modalTitle) modalTitle.textContent = title;
+      if (modalDesc) modalDesc.textContent = fullDesc;
+      if (modalGithub) modalGithub.href = githubLink;
+
+      // 3. Load the default video
+      if (modalVideoSource && modalVideo) {
+        modalVideoSource.src = defaultVideo;
+        modalVideo.load();
+      }
+
+      modal.showModal();
+    });
+  });
+
+  // 4. Improved Tab Switcher Logic
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!activeCard) return;
+
+      const type = btn.getAttribute('data-type');
+      const videoSrc = type === 'bot' 
+          ? activeCard.getAttribute('data-video-bot') 
+          : activeCard.getAttribute('data-video-web');
+
+      if (modalVideoSource && modalVideo && videoSrc) {
+          modalVideoSource.src = videoSrc;
+          modalVideo.load();
+      }
+
+      // Visual update for the buttons
+      tabButtons.forEach(b => b.classList.remove('bg-white/40', 'border-white/60'));
+      btn.classList.add('bg-white/40', 'border-white/60');
+    });
+  });
+
+  // 5. Close & Cleanup
+  closeButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      modal.close();
+      if (modalVideo) modalVideo.pause();
+    });
+  });
+
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        modal.close();
+        if (modalVideo) modalVideo.pause();
+    }
+  });
+</script>

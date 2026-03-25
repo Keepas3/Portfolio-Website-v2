@@ -1,0 +1,42 @@
+---
+// src/components/ProjectCard.astro
+const { title, description, fullDescription, video, videoBot, videoWeb, link, techStack, award } = Astro.props;
+---
+
+<!-- Change from <a> to <button> so it doesn't just jump to GitHub immediately -->
+<button 
+    class="project-trigger group relative pt-6 px-8 pb-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full text-left"
+    data-title={title}
+    data-video={video} data-video-bot={videoBot} data-video-web={videoWeb} data-full-desc={fullDescription}
+    data-full-desc={fullDescription || description}
+    data-link={link}
+>
+    <div class="h-7 mb-3 flex items-center">
+        {award && (
+            <div class="gold-badge-base">
+                <div class="absolute inset-0 w-[200%] h-full bg-gradient-to-r from-transparent via-white/60 to-transparent -skew-x-12 animate-shimmer pointer-events-none"></div>
+                <i class='bx bxs-trophy relative z-10 text-xs'></i>
+                <span class="relative z-10">{award}</span>
+            </div>
+        )}
+    </div>
+
+    <div class="flex-grow">
+        <h3 class="text-2xl font-black text-slate-900 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+            {title}
+        </h3>
+        <p class="text-slate-600 mt-3 leading-relaxed line-clamp-3 text-sm">
+            {description}
+        </p>
+    </div>
+
+    <div class="mt-6 pt-5 border-t border-slate-50 w-full">
+        <div class="flex flex-wrap gap-2">
+            {techStack.split('|').map((tech: string) => (
+                <span class="text-[10px] font-mono font-bold uppercase tracking-tighter px-2 py-1 bg-slate-100 text-slate-500 rounded">
+                    {tech.trim()}
+                </span>
+            ))}
+        </div>
+    </div>
+</button>

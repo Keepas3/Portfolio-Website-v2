@@ -1,0 +1,19 @@
+---
+// src/components/CourseCard.astro
+import { Image } from 'astro:assets';
+const { name, code, iconPath } = Astro.props;
+
+const icons = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/*.{png,jpg,svg}');
+---
+
+<div class="flex items-center gap-4 p-4 bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-md transition-shadow">
+    <div class="w-10 h-10 shrink-0">
+        {iconPath && icons[iconPath] && (
+            <Image src={icons[iconPath]()} alt={name} class="w-full h-full object-contain" />
+        )}
+    </div>
+    <div>
+        <h4 class="font-bold text-slate-800 leading-tight">{name}</h4>
+        <p class="text-xs text-slate-500 uppercase font-mono mt-1">{code}</p>
+    </div>
+</div>

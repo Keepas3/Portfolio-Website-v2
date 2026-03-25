@@ -1,0 +1,59 @@
+---
+import { Image } from 'astro:assets';
+
+interface Props {
+  title: string;
+  company: string;
+  location: string;
+  date: string;
+  logo: string;
+  bullets: string[];
+}
+
+const { title, company, location, date, logo, bullets } = Astro.props;
+
+// This is the "Magic" part: It finds all images in your assets folder
+const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/*.{jpeg,jpg,png,gif}');
+
+// We check if the logo path provided in your index.astro exists in our assets
+if (!images[logo]) throw new Error(`"${logo}" does not exist in glob: "src/assets/img/*.{jpeg,jpg,png,gif}"`);
+---
+
+<div class="relative pl-8 pb-12 border-l-2 border-slate-200 last:border-0 last:pb-0">
+    <div class="absolute -left-[9px] top-0 w-4 h-4 bg-blue-600 rounded-full border-4 border-white"></div>
+    
+    <div class="flex flex-col md:flex-row gap-6">
+        {logo && (
+            <div class="w-16 h-16 shrink-0 bg-white p-2 rounded-xl shadow-sm border border-slate-100 flex items-center justify-center overflow-hidden">
+                {/* Use the Astro <Image /> component instead of <img> */}
+                <Image 
+                    src={images[logo]()} 
+                    alt={company} 
+                    class="max-w-full max-h-full object-contain"
+                />
+            </div>
+        )}
+        
+        <div class="flex-1">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start mb-4">
+                <div>
+                    <h3 class="text-xl font-bold text-slate-900">{title}</h3>
+                    <p class="text-blue-600 font-medium">{company} • {location}</p>
+                </div>
+                <span class="text-sm font-semibold px-3 py-1 bg-slate-100 rounded-full text-slate-600 mt-2 md:mt-0 self-start">
+                    {date}
+                </span>
+            </div>
+            
+            
+            <ul class="space-y-3">
+                {bullets.map((bullet) => (
+                    <li class="text-slate-600 leading-relaxed flex gap-3">
+                        <span class="text-blue-500 mt-1.5 text-xs">●</span>
+                        {bullet}
+                    </li>
+                ))}
+            </ul>
+        </div>
+    </div>
+</div>

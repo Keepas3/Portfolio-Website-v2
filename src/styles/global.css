@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+/* 1. Bulletproof Shimmer Animation */
+@keyframes shimmer {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* 2. Custom Tailwind Utility Classes */
+@utility animate-shimmer {
+  animation: shimmer 2.5s infinite linear;
+}
+
+@utility gold-badge-base {
+  @apply relative overflow-hidden inline-flex items-center gap-2 px-4 py-1 rounded-full 
+         bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 
+         text-amber-950 text-[11px] font-black uppercase tracking-wider 
+         shadow-[0_0_20px_rgba(251,191,36,0.3)] border border-amber-300/50;
+}
