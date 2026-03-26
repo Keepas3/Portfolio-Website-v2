@@ -15,9 +15,9 @@ const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
 
 const myProjects = [
     {
-        id: "campus-hub", // Add a unique ID for each
+        id: "campus-hub", 
         title: "SJU Campus Hub",
-        video: "/videos/campus-hub-demo.mp4",
+        video: "/videos/SJU_Campus_Hub.mp4",
         description:  `Winner of the St. John's Track for St. John's Hacks 2025. A centralized platform designed to connect all events of St. John's University in one place.
                         Provides information about campus activities, club events, and study groups.`,
         fullDescription: `A centralized platform designed to connect all events of St. John's University in one place. 
@@ -29,9 +29,9 @@ const myProjects = [
         award: "1st Place - SJU Hacks"
     },
     {
-        id: "adapt-iq", // Add a unique ID for each
+        id: "adapt-iq", 
         title: "AdaptIQ",
-        video: "/videos/adapt-iq-demo.mp4",
+        video: "/videos/AdaptIQ-0.mp4",
         description: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
                       Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.`,
         fullDescription: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
@@ -58,7 +58,7 @@ const myProjects = [
     {
         id: "vcrts", 
         title: "VCRTS",
-        video: "/videos/vcrts-demo.mp4",
+        video: "/videos/VCRTS.mp4",
         description: `A distributed cloud computing system that leverages parked vehicles' computational resources. 
                       Features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
                       Built by a team of 5 developers as a capstone project.`,
@@ -83,7 +83,7 @@ const myProjects = [
     {
         id: "video-recap", 
         title: "Video Recap",
-        video: "/videos/video-recap-demo.mp4",
+        video: "/videos/video_recap.mp4",
         description: `Designed to condense YouTube videos into short, concise sentences for quick understanding of lengthy content. Utilizes OpenRouter AI and YouTube transcripts to generate summaries.
                       Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.`,
         fullDescription: `Video Recap is a web application designed to condense YouTube videos into short, concise paragraphs using OpenRouter AI and YouTube transcripts. 
@@ -106,7 +106,7 @@ const myProjects = [
     {
         id: "portfolio-website", 
         title: "Portfolio Website",
-        video: "/videos/portfolio-website-demo.mp4",
+        video: "/videos/old_website.mp4",
         description: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS to showcase my work and journey as a software developer.`,
         fullDescription: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS 
                       to showcase my work and journey as a software developer.
@@ -157,7 +157,13 @@ const courses = [
     { name: "Software Engineering", code: "CUS 1156", iconPath: "/src/assets/img/SE_icon.png" },
     { name: "Analysis of Algorithms", code: "CUS 1168", iconPath: "/src/assets/img/algorithms_icon.png" },
     { name: "Data Security/Cryptography", code: "CUS 1185", iconPath: "/src/assets/img/Cryptography.png" },
-    // Add more here...
+    { name: "Database Systems", code: "CUS 1166", iconPath: "/src/assets/img/dbms_icon.png" },
+    { name: "Artificial Intelligence", code: "CUS 1175", iconPath: "/src/assets/img/AI_icon.png" },
+    { name: "Operating Systems", code: "CUS 1167", iconPath: "/src/assets/img/operating_systems_icon.png" },
+    { name: "Networking", code: "CUS 1170", iconPath: "/src/assets/img/networking_icon.png" },
+    { name: "Intro to Artificial Intelligence", code: "CUS 1176", iconPath: "/src/assets/img/AI_icon.png" },
+    { name: "Data Structures", code: "CUS 1176", iconPath: "/src/assets/img/data_structures.png" }
+
 ];
 ---
 
@@ -168,7 +174,7 @@ const courses = [
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
                 Welcome,<br>I'm <span class="text-blue-600">Bryan Fung</span>
             </h1>
-            <p class="text-xl text-slate-600 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. Currently building Snap Notes and Dragon Bot.</p>
+            <p class="text-xl text-slate-600 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. </p>
             <div class="mt-10 flex gap-4 justify-center md:justify-start">
                 <a 
                     href="/Bryan_Fung_Resume.pdf" 
@@ -181,6 +187,7 @@ const courses = [
                 </a>
                 <div class="flex items-center gap-4 text-3xl">
                     <a href="https://github.com/Keepas3" class="hover:text-blue-600"><i class='bx bxl-github'></i></a>
+                    <a href="https://www.linkedin.com/in/bryan-fung-a2a089256/" class="hover:text-blue-500 transition-colors"><i class='bx bxl-linkedin'></i></a>
                 </div>
             </div>
         </div>
@@ -226,7 +233,7 @@ const courses = [
                         I’m a big believer in staying active and using sports to keep my competitive edge sharp.
                     </p>
                     <p class="font-medium text-slate-900">
-                        Currently focusing on <span class="text-blue-600">Snap Notes</span> and <span class="text-blue-600">Dragon Bot</span>,
+                        Currently focusing on <span class="text-blue-600">Snap Notes</span> and <span class="text-blue-600">Dragon Bot 2.0</span>,
                         projects that you can check out below. I’m always open to connecting, so feel free to reach out if you’d like to chat about potential opportunities or just want to say hi!
                     </p>
                 </div>
@@ -315,6 +322,14 @@ const courses = [
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
+            <a href="mailto:bryanfung61@gmail.com" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                    <i class='bx bx-envelope text-3xl'></i>
+                </div>
+                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Email</h3>
+                <p class="text-xl font-bold text-slate-900">bryanfung61@gmail.com</p>
+            </a>
+
             <a href="tel:3473251321" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
                 <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
                     <i class='bx bx-phone text-3xl'></i>
@@ -323,13 +338,7 @@ const courses = [
                 <p class="text-xl font-bold text-slate-900">(347) 325-1321</p>
             </a>
 
-            <a href="mailto:bryanfung61@gmail.com" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
-                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class='bx bx-envelope text-3xl'></i>
-                </div>
-                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Email</h3>
-                <p class="text-xl font-bold text-slate-900">bryanfung61@gmail.com</p>
-            </a>
+            
 
         </div>
     </div>
