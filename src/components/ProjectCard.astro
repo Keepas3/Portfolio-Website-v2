@@ -1,13 +1,14 @@
 ---
 // src/components/ProjectCard.astro
-const { title, description, fullDescription, video, videoBot, videoWeb, link, techStack, award } = Astro.props;
+const { title, description, fullDescription, video, videoBot, videoWeb, link, techStack, award, images } = Astro.props;
 ---
 
 <button 
     class="project-trigger group relative pt-6 px-8 pb-8 bg-white rounded-3xl border border-slate-100 shadow-sm hover:shadow-2xl hover:-translate-y-2 transition-all duration-500 flex flex-col h-full text-left"
     data-title={title}
-    data-video={video} data-video-bot={videoBot} data-video-web={videoWeb} data-full-desc={fullDescription}
-    data-full-desc={fullDescription || description}
+    data-video={video} 
+    data-video-bot={videoBot} 
+    data-video-web={videoWeb}
     data-link={link}
 >
     <div class="h-7 mb-3 flex items-center">
@@ -19,14 +20,24 @@ const { title, description, fullDescription, video, videoBot, videoWeb, link, te
             </div>
         )}
     </div>
+    <div class="hidden-gallery hidden">
+    {images && images.split('|').map((img: string) => (
+        <img src={img.trim()} alt="Gallery Image" loading="lazy" />
+    ))}
+</div>
 
     <div class="flex-grow">
-        <h3 class="text-2xl font-black text-slate-900 group-hover:text-blue-600 transition-colors duration-300 leading-tight">
+        <h3 class="text-2xl font-black text-slate-900 group-hover:text-blue-600 transition-colors duration-300">
             {title}
         </h3>
-        <p class="text-slate-600 mt-3 leading-relaxed line-clamp-3 text-sm">
+        <p class="text-slate-600 mt-3 line-clamp-3 text-sm">
             {description}
         </p>
+    </div>
+
+    <div class="hidden-full-desc hidden" set:html={fullDescription}>
+</div>
+        
     </div>
 
     <div class="mt-6 pt-5 border-t border-slate-50 w-full">

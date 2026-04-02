@@ -1,29 +1,43 @@
-<dialog id="project-modal" class="fixed inset-0 m-auto backdrop:bg-slate-900/90 backdrop:backdrop-blur-xl rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-0 w-[95%] max-w-6xl overflow-hidden outline-none border border-white/10 bg-white">
+<dialog id="project-modal" class="fixed inset-0 m-auto backdrop:bg-slate-900/90 backdrop:backdrop-blur-xl rounded-3xl shadow-[0_0_50px_rgba(0,0,0,0.5)] p-0 w-[95%] max-w-6xl h-fit max-h-[90vh] overflow-hidden outline-none border border-white/10 bg-white">
     
-    <div class="flex flex-col lg:flex-row h-full lg:h-[75vh]">
+    <div class="flex flex-col lg:flex-row h-full">
         
-        <div class="w-full lg:w-[65%] bg-black flex items-center justify-center relative border-r border-slate-100">
-            <div id="video-switcher" class="absolute top-4 left-4 z-20 flex gap-2">
-        <button data-type="bot" class="video-tab-btn px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-lg border border-white/20 hover:bg-white/40 transition-all active-tab">
-            Bot Demo
-        </button>
-        <button data-type="web" class="video-tab-btn px-4 py-1.5 bg-white/20 backdrop-blur-md text-white text-xs font-bold rounded-lg border border-white/20 hover:bg-white/40 transition-all">
-            Website Demo
-        </button>
-    </div>
-            <video 
-                id="modal-video" 
-                class="w-full h-full max-h-full object-contain shadow-2xl" 
-                controls 
-                autoplay 
-                muted 
-                loop 
-                playsinline
-            >
+        <div class="w-full lg:w-[65%] bg-black flex items-center justify-center relative border-r border-slate-100 min-h-[400px] lg:min-h-[550px] overflow-hidden">
+            
+            <div id="video-switcher" class="absolute top-4 left-4 z-40 flex flex-wrap gap-2">
+                <div class="flex gap-1 bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/20">
+                    <button id="show-video" class="video-tab-btn px-4 py-1.5 bg-blue-600 text-white text-xs font-bold rounded-lg transition-all">
+                        <i class='bx bx-play-circle mr-1'></i> Video
+                    </button>
+                    <button id="show-gallery" class="video-tab-btn px-4 py-1.5 text-white/70 text-xs font-bold rounded-lg hover:bg-white/20 transition-all">
+                        <i class='bx bx-images mr-1'></i> Gallery
+                    </button>
+                </div>
+
+                <div id="ecosystem-tabs" class="hidden flex gap-1 bg-black/40 backdrop-blur-md p-1 rounded-xl border border-white/20">
+                    <button data-type="bot" class="video-tab-btn px-4 py-1.5 text-white/70 text-xs font-bold rounded-lg hover:bg-white/20 transition-all">Bot View</button>
+                    <button data-type="web" class="video-tab-btn px-4 py-1.5 text-white/70 text-xs font-bold rounded-lg hover:bg-white/20 transition-all">Web View</button>
+                </div>
+            </div>
+
+            <video id="modal-video" class="w-full h-full object-contain shadow-2xl" controls autoplay muted loop playsinline>
                 <source src="" type="video/mp4">
             </video>
+
+            <div id="modal-gallery-container" class="hidden absolute inset-0 bg-slate-900 group/gallery z-30">
+                <div id="modal-gallery" class="flex h-full w-full overflow-x-auto snap-x snap-mandatory scrollbar-hide scroll-smooth">
+                    </div>
+
+                <button id="prev-img" class="absolute left-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-blue-600 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover/gallery:opacity-100 shadow-xl">
+                    <i class='bx bx-chevron-left text-3xl'></i>
+                </button>
+                
+                <button id="next-img" class="absolute right-4 top-1/2 -translate-y-1/2 z-40 w-12 h-12 bg-black/50 hover:bg-blue-600 text-white rounded-full flex items-center justify-center backdrop-blur-md transition-all opacity-0 group-hover/gallery:opacity-100 shadow-xl">
+                    <i class='bx bx-chevron-right text-3xl'></i>
+                </button>
+            </div>
             
-            <button class="close-modal lg:hidden absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white backdrop-blur-md">
+            <button class="close-modal lg:hidden absolute top-4 right-4 bg-black/50 p-2 rounded-full text-white backdrop-blur-md z-50">
                 <i class='bx bx-x text-2xl'></i>
             </button>
         </div>
@@ -40,11 +54,12 @@
             </div>
 
             <div class="flex-grow overflow-y-auto pr-2 custom-scrollbar">
-                <p id="modal-description" class="text-slate-600 leading-relaxed whitespace-pre-line text-sm"></p>
+                <div id="modal-description" class="text-slate-600 leading-relaxed text-sm space-y-4 prose prose-slate prose-sm max-w-none">
+                    </div>
             </div>
             
             <div class="mt-8 pt-6 border-t border-slate-100">
-                <a id="modal-github" href="#" target="_blank" class="flex items-center justify-center gap-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200">
+                <a id="modal-github" href="#" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 py-4 bg-slate-900 text-white rounded-2xl font-bold hover:bg-blue-600 transition-all shadow-lg hover:shadow-blue-200">
                     <i class='bx bxl-github text-xl'></i> View Source Code
                 </a>
             </div>
@@ -53,26 +68,28 @@
 </dialog>
 
 <style>
-    /* Ensure the dialog stays centered and animates like a folder opening */
-    dialog {
-        opacity: 0;
-        transform: scale(0.9) translateY(30px);
-        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+    /* 1. Ensure the container takes up the full height of the media section */
+    #modal-gallery {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        background-color: #0f172a; /* Nice dark background for vertical images */
     }
 
-    dialog[open] {
-        opacity: 1;
-        transform: scale(1) translateY(0);
+    /* 2. Use :global to target the images you injected via JS */
+    #modal-gallery :global(img) {
+        flex: 0 0 100%;      /* Force one image to take 100% of the flex width */
+        width: 100% !important;
+        height: 100% !important;
+        display: block;      /* Removes the tiny gap at the bottom of images */
+        scroll-snap-align: center;
+        
+        /* 🟢 CHOOSE ONE BELOW: */
+        object-fit: cover;   /* Fills the whole space, but might crop top/bottom */
+        /* object-fit: contain; */ /* Shows the whole image, but might leave black bars on sides */
     }
 
-    /* Standard Dialog Centering Fix */
-    dialog::backdrop {
-        /* 40% opacity allows the portfolio content to stay visible */
-        background: rgba(15, 23, 42, 0.4); 
-        /* The blur creates the "Glass" effect */
-        backdrop-filter: blur(12px); 
-    }
-
-    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-    .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+    /* 3. Keep your utility classes */
+    .scrollbar-hide::-webkit-scrollbar { display: none; }
+    .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 </style>

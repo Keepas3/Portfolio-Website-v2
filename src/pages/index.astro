@@ -18,12 +18,24 @@ const myProjects = [
         id: "campus-hub", 
         title: "SJU Campus Hub",
         video: "/videos/SJU_Campus_Hub.mp4",
+        images: "/src/assets/gallery/Hacks2025.png | /src/assets/gallery/SJU_Campus_Hub_Group.png",
         description:  `Winner of the St. John's Track for St. John's Hacks 2025. A centralized platform designed to connect all events of St. John's University in one place.
                         Provides information about campus activities, club events, and study groups.`,
-        fullDescription: `A centralized platform designed to connect all events of St. John's University in one place. 
-                      Provides information about campus activities, club events, and study groups.
-                      Built in a team of 3 using HTML/CSS and JavaScript, and deployed on Vercel.
-                      Our Motto is Building for a Better Student Life!`,
+        fullDescription: `
+            <div class="space-y-4">
+                <p><strong>SJU Campus Hub</strong> is a centralized ecosystem designed to connect the St. John's community. We built this to solve the fragmentation of campus information, creating a hub for student life.</p>    
+                <h4 class="font-bold text-slate-900 border-b pb-1">Key Features</h4>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li><strong>Unified Event Tracking:</strong> Real-time information on campus activities, club meetings, and study sessions.</li>
+                    <li><strong>Team Collaboration:</strong> Developed in the St. John's Hacks 2025hackathon in a team of 3 as the lead frontend developer.</li>
+                    <li><strong>Modern Deployment:</strong> Optimized for performance using HTML/CSS and JavaScript being hosted via <strong>Vercel</strong> for seamless access.</li>
+                </ul>
+
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
+                    <p class="text-blue-700 italic font-medium">"Building for a Better Student Life!"</p>
+                </div>
+            </div>
+        `,
         link: "https://github.com/Keepas3/SJU-Campus-Hub",
         techStack: "HTML/CSS | JavaScript | Vercel",
         award: "1st Place - SJU Hacks"
@@ -32,11 +44,23 @@ const myProjects = [
         id: "adapt-iq", 
         title: "AdaptIQ",
         video: "/videos/AdaptIQ-0.mp4",
+        images: "/src/assets/gallery/StJohnsHacks2026.jpg | /src/assets/gallery/ToltIQ_presentation.png| /src/assets/gallery/ToltIQ.jpg ",
         description: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
                       Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.`,
-        fullDescription: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
-                      Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.
-                      Built in a team of 3 using Tailwind CSS, PowerPoint API, OpenAI API, and TypeScript.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p><strong>AdaptIQ</strong> is an intelligent PowerPoint Add-on that bridges the gap between slide design and active research. Built to streamline the workflow for professionals, it acts as a real-time sidekick during the content creation process.</p>
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Key Innovations</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>Context Parsing:</strong> Analyzes slide text via <strong>OpenAI</strong> to understand the core subject matter.</li>
+                <li><strong>Automated Imagery:</strong> Integrated <strong>DALL-E</strong> API to generate visuals based on the content.</li>
+                <li><strong>Deep Research:</strong> Leverages the <strong>Tavily API</strong> to pull real-time data and citations directly into the presentation.</li>
+            </ul>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-3 rounded-r-lg">
+                <p class="text-amber-800 text-xs font-medium">🏆 3rd Place ToltIQ Track — St. John's University Hacks 2026</p>
+            </div>
+        </div>
+    `,
         link: "https://github.com/Keepas3/adapt-iq",
         techStack: "Tailwind CSS | Tavily API | TypeScript | OpenAI API",
         award: "3rd Place - SJU Hacks"
@@ -48,10 +72,20 @@ const myProjects = [
         videoWeb: "/videos/Video_Demo.mp4",
         description: `A Discord Bot providing real-time clan tracking, smart war & raid reminders with automatic notifications. 
                       Includes a direct feed to the latest leaks and news from Reddit.`,
-        fullDescription: `Dragon Bot 2.0 is a Discord Bot designed to provide real-time clan tracking, smart war & raid reminders with automatic notifications. 
-                      It includes a direct feed to the latest leaks and news from Reddit.
-                      Commands are designed to help users stay updated on their clan's performance and upcoming events.
-                      Built using Python, Discord API, and Railway for hosting. The web dashboard is built with Astro and Tailwind CSS.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p><strong>Dragon Bot 2.0</strong> is a Discord Bot designed for clan management and tracking. Where to get started? Check out the Website! </p>
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Core Capabilities</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>Live Clan Tracking:</strong> Real-time monitoring of performance metrics, player and opponent statistics, and clan activities.</li>
+                <li><strong>Smart Reminders:</strong> Automated war and raid notifications that ensure members never miss their attacks.</li>
+                <li><strong>News Aggregator:</strong> Direct integration with <strong>Reddit API</strong> to deliver the latest leaks and updates in real-time.</li>
+            </ul>
+            <div class="bg-indigo-50 border-l-4 border-indigo-600 p-3 rounded-r-lg">
+                <p class="text-indigo-700 text-xs font-medium">Built with a scalable Python backend and a modern Astro/Tailwind web interface.</p>
+            </div>
+        </div>
+    `,
         link: "https://github.com/Keepas3/Dragon-Bot-2.0",
         techStack: "Python | Discord API | Railway | Reddit API | Astro | Tailwind CSS"
     },
@@ -62,33 +96,43 @@ const myProjects = [
         description: `A distributed cloud computing system that leverages parked vehicles' computational resources. 
                       Features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
                       Built by a team of 5 developers as a capstone project.`,
-        fullDescription: `VCRTS is a distributed cloud computing system that leverages parked vehicles' computational resources. 
-                      It features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
-                      The system is designed to optimize the use of idle computational resources in parked vehicles, providing a cost-effective and scalable solution for cloud computing needs.
-                      Built by a team of 5 developers as a capstone project.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p><strong>VCRTS (Vehicular Cloud Resource Tracking System)</strong> is a distributed computing platform designed to harness the idle processing power of parked vehicles. In short, this capstone project focused on resource optimization.</p>
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">System Architecture</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>Job Scheduling:</strong> An algorithmic approach to resource allocation based on vehicle availability and job priority.</li>
+                <li><strong>Dual-GUI Design:</strong> Dedicated interfaces for both system admins (resource management) and clients (job submission).</li>
+                <li><strong>Persistent Data:</strong> Powered by a robust <strong>MySQL</strong> backend to ensure zero data loss during node handoffs.</li>
+            </ul>
+            <div class="bg-slate-100 border-l-4 border-slate-900 p-3 rounded-r-lg">
+                <p class="text-slate-700 text-xs font-bold uppercase tracking-tighter">Capstone Project — Team of 5 Developers</p>
+            </div>
+        </div>
+    `,
         link: "https://github.com/Alegacki21/VCRTS-SWE-Project",
         techStack: "Java | Java Swing | MYSQL"
     },
-    // {
-    //     id: "snapnotes", 
-    //     title: "SnapNotes",
-    //     video: "/videos/snapnotes-demo.mp4",
-    //     description: `A web application that simplifies studying from word documents using LLMs. 
-    //                   Users upload files and the app generates summaries and interactive study cards with Q&A.`,
-    //     fullDescription: `SnapNotes is a web application that simplifies studying from word documents using LLMs. 
-    //                   Users can upload their study materials, and the app generates concise summaries and interactive study cards with Q&A.`,
-    //     link: "https://github.com/Keepas3/SnapNotes",
-    //     techStack: "Python | HTML/CSS | React"
-    // },
     {
         id: "video-recap", 
         title: "Video Recap",
         video: "/videos/video_recap.mp4",
         description: `Designed to condense YouTube videos into short, concise sentences for quick understanding of lengthy content. Utilizes OpenRouter AI and YouTube transcripts to generate summaries.
                       Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.`,
-        fullDescription: `Video Recap is a web application designed to condense YouTube videos into short, concise paragraphs using OpenRouter AI and YouTube transcripts. 
-                      Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.
-                      Built using Python, OpenRouter AI, and HTML/CSS.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p><strong>Video Recap</strong> was born from a simple problem: the information density of YouTube is too high for quick consumption. This tool uses AI to transform long-form video transcripts into digestible, high-level summaries.</p>
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">The Stack</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>AI Orchestration:</strong> Utilized <strong>OpenRouter AI</strong> to access the best-performing LLMs for text summarization.</li>
+                <li><strong>Natural Language Processing:</strong> Integrated <strong>Hugging Face Transformers</strong> to refine the transcript analysis process.</li>
+                <li><strong>Data Retrieval:</strong> Automated the extraction of YouTube transcripts to ensure 100% accuracy in source data.</li>
+            </ul>
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
+                <p class="text-blue-700 text-xs font-medium">Built during the SJU ACM x HeadStarter Hackathon 2024 — Team of 4.</p>
+            </div>
+        </div>
+    `,
         link: "https://github.com/Keepas3/VideoRecap-HeadStarterHackathon",
         techStack: "Python | OpenRouterAI | HTML/CSS | Hugging Face Transformer"
     },
@@ -108,9 +152,22 @@ const myProjects = [
         title: "Portfolio Website",
         video: "/videos/old_website.mp4",
         description: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS to showcase my work and journey as a software developer.`,
-        fullDescription: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS 
-                      to showcase my work and journey as a software developer.
-                      The video will showcase a side-by-side comparison of the old HTML/CSS version and the new Astro version.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p>The website you are currently viewing! <strong>Astro-powered</strong> and written in <strong>TypeScript</strong>  and <strong>Tailwind CSS</strong>. 
+            I rebuilt this from the ground up to move away from static HTML/CSS toward a more dynamic architecture.</p>
+            
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Key Improvements</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>Responsive Design:</strong> Built with <strong>Tailwind CSS</strong> for a seamless experience for mobile and desktop.</li>
+                <li><strong>Typed Components:</strong> Used <strong>TypeScript</strong> to build reusable UI components (like the very modal you are reading right now).</li>
+            </ul>
+
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
+                <p class="text-blue-700 text-xs font-medium italic">Check out the side-by-side video to see the evolution from the legacy version to this modern build.</p>
+            </div>
+        </div>
+    `,
         link: "https://github.com/Keepas3/Portfolio-Website",
         techStack: "Astro | Tailwind CSS | Vercel | JavaScript"
     }
@@ -351,46 +408,71 @@ const courses = [
 
 </MainLayout>
 <script>
+  // 1. SELECTORS
   const modal = document.querySelector('#project-modal') as HTMLDialogElement;
-  const projectCards = document.querySelectorAll('.project-trigger');
-  const closeButtons = document.querySelectorAll('.close-modal');
-  const videoSwitcher = document.querySelector('#video-switcher') as HTMLElement;
-  const tabButtons = document.querySelectorAll('.video-tab-btn');
-
-  const modalTitle = document.querySelector('#modal-title');
-  const modalDesc = document.querySelector('#modal-description');
   const modalVideo = document.querySelector('#modal-video') as HTMLVideoElement;
   const modalVideoSource = document.querySelector('#modal-video source') as HTMLSourceElement;
+  const modalGalleryContainer = document.querySelector('#modal-gallery-container') as HTMLElement;
+  const modalGallery = document.querySelector('#modal-gallery') as HTMLElement;
+  
+  const projectCards = document.querySelectorAll('.project-trigger');
+  const closeButtons = document.querySelectorAll('.close-modal');
+  
+  const modalTitle = document.querySelector('#modal-title');
+  const modalDesc = document.querySelector('#modal-description');
   const modalGithub = document.querySelector('#modal-github') as HTMLAnchorElement;
 
-  // We'll store the currently active card here so the tabs know where to pull data from
+  const ecosystemTabs = document.querySelector('#ecosystem-tabs') as HTMLElement;
+  const showVideoBtn = document.querySelector('#show-video');
+  const showGalleryBtn = document.querySelector('#show-gallery');
+  const prevBtn = document.querySelector('#prev-img');
+  const nextBtn = document.querySelector('#next-img');
+
   let activeCard: Element | null = null;
 
+  // 2. THE MAIN OPEN LOGIC
   projectCards.forEach((card) => {
     card.addEventListener('click', () => {
-      activeCard = card; // Set the current context
+      activeCard = card; 
       
+      // Always reset to Video view when opening a new project
+      showView('video');
+
+      // Check for images to show/hide the Gallery toggle
+      const gallerySource = card.querySelector('.hidden-gallery');
+      const hasImages = gallerySource ? gallerySource.querySelectorAll('img').length > 0 : false;
+      const galleryHTML = gallerySource?.innerHTML || '';
+      
+      if (showGalleryBtn instanceof HTMLElement) {
+        showGalleryBtn.style.display = hasImages ? 'flex' : 'none';
+      }
+
+      // Inject images into the scrollable gallery div
+      if (modalGallery) {
+        modalGallery.innerHTML = galleryHTML;
+        modalGallery.scrollLeft = 0; // Reset scroll position to the first image
+      }
+
+      // Metadata Injection
       const title = card.getAttribute('data-title') || '';
-      const fullDesc = card.getAttribute('data-full-desc') || '';
       const githubLink = card.getAttribute('data-link') || '#';
+      const richDescription = card.querySelector('.hidden-full-desc')?.innerHTML || '';
       
-      // Check if this project has the "Ecosystem" videos
       const videoBot = card.getAttribute('data-video-bot');
       const videoWeb = card.getAttribute('data-video-web');
       const defaultVideo = card.getAttribute('data-video') || videoBot || '';
 
-      // 1. Toggle Switcher Visibility
-      if (videoSwitcher) {
-        // Only show the tabs if BOTH video types exist
-        videoSwitcher.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
+      // Ecosystem Switcher (Bot/Web) Visibility
+      if (ecosystemTabs) {
+        ecosystemTabs.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
       }
 
-      // 2. Inject basic data
+      // Text Injection
       if (modalTitle) modalTitle.textContent = title;
-      if (modalDesc) modalDesc.textContent = fullDesc;
+      if (modalDesc) modalDesc.innerHTML = richDescription;
       if (modalGithub) modalGithub.href = githubLink;
 
-      // 3. Load the default video
+      // Video Source Handling
       if (modalVideoSource && modalVideo) {
         modalVideoSource.src = defaultVideo;
         modalVideo.load();
@@ -400,39 +482,63 @@ const courses = [
     });
   });
 
-  // 4. Improved Tab Switcher Logic
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (!activeCard) return;
-
-      const type = btn.getAttribute('data-type');
-      const videoSrc = type === 'bot' 
-          ? activeCard.getAttribute('data-video-bot') 
-          : activeCard.getAttribute('data-video-web');
-
-      if (modalVideoSource && modalVideo && videoSrc) {
-          modalVideoSource.src = videoSrc;
-          modalVideo.load();
-      }
-
-      // Visual update for the buttons
-      tabButtons.forEach(b => b.classList.remove('bg-white/40', 'border-white/60'));
-      btn.classList.add('bg-white/40', 'border-white/60');
-    });
-  });
-
-  // 5. Close & Cleanup
-  closeButtons.forEach((button) => {
-    button.addEventListener('click', () => {
-      modal.close();
-      if (modalVideo) modalVideo.pause();
-    });
-  });
-
-  modal?.addEventListener('click', (e) => {
-    if (e.target === modal) {
-        modal.close();
+  // 3. HELPER FUNCTIONS (Using 'function' keyword for hoisting)
+  function showView(type: 'video' | 'gallery') {
+    if (type === 'video') {
+        modalVideo?.classList.remove('hidden');
+        modalGalleryContainer?.classList.add('hidden');
+        showVideoBtn?.classList.add('bg-blue-600', 'text-white');
+        showGalleryBtn?.classList.remove('bg-blue-600', 'text-white');
+    } else {
+        modalVideo?.classList.add('hidden');
+        modalGalleryContainer?.classList.remove('hidden');
+        showGalleryBtn?.classList.add('bg-blue-600', 'text-white');
+        showVideoBtn?.classList.remove('bg-blue-600', 'text-white');
         if (modalVideo) modalVideo.pause();
     }
+  }
+
+  function scrollGallery(direction: 'next' | 'prev') {
+    if (!modalGallery) return;
+    const scrollAmount = modalGallery.clientWidth; 
+    modalGallery.scrollBy({ 
+        left: direction === 'next' ? scrollAmount : -scrollAmount, 
+        behavior: 'smooth' 
+    });
+  }
+
+  // 4. EVENT LISTENERS
+  showVideoBtn?.addEventListener('click', () => showView('video'));
+  showGalleryBtn?.addEventListener('click', () => showView('gallery'));
+  prevBtn?.addEventListener('click', () => scrollGallery('prev'));
+  nextBtn?.addEventListener('click', () => scrollGallery('next'));
+
+  // Ecosystem Toggle Logic
+  const ecoButtons = document.querySelectorAll('#ecosystem-tabs button');
+  ecoButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (!activeCard || !modalVideo || !modalVideoSource) return;
+      const type = btn.getAttribute('data-type');
+      const videoSrc = activeCard.getAttribute(`data-video-${type}`);
+
+      if (videoSrc) {
+          showView('video'); // Swap back to video if they were in gallery
+          modalVideoSource.src = videoSrc;
+          modalVideo.load();
+          modalVideo.play();
+
+          ecoButtons.forEach(b => b.classList.remove('bg-white/40', 'text-white'));
+          btn.classList.add('bg-white/40', 'text-white');
+      }
+    });
   });
+
+  // Cleanup & Close
+  const closeModal = () => {
+      modal.close();
+      if (modalVideo) modalVideo.pause();
+  };
+
+  closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
+  modal?.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 </script>
