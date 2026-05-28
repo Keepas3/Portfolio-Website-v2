@@ -1,25 +1,52 @@
 @import "tailwindcss";
 
-/* 1. Bulletproof Shimmer Animation */
-@keyframes shimmer {
-  from {
-    transform: translateX(-100%);
+@theme {
+
+  --animate-shimmer: shimmer 2.5s infinite linear;
+  --animate-infinite-scroll: scroll 15s linear infinite;
+
+
+  @keyframes shimmer {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: translateX(100%);
+    }
   }
-  to {
-    transform: translateX(100%);
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); } 
   }
 }
 
-/* 2. Custom Tailwind Utility Classes */
-@utility animate-shimmer {
-  animation: shimmer 2.5s infinite linear;
-}
 
 @utility gold-badge-base {
   @apply relative overflow-hidden inline-flex items-center gap-2 px-4 py-1 rounded-full 
          bg-gradient-to-r from-amber-400 via-yellow-200 to-amber-500 
          text-amber-950 text-[11px] font-black uppercase tracking-wider 
          shadow-[0_0_20px_rgba(251,191,36,0.3)] border border-amber-300/50;
+}
+
+
+
+
+.animate-infinite-scroll:hover {
+    animation-play-state: paused;
+}
+.animate-infinite-scroll:hover .bg-white {
+    opacity: 0.3;
+    filter: grayscale(100%);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.animate-infinite-scroll .bg-white:hover {
+    opacity: 1 !important;
+    filter: grayscale(0%) !important;
+    transform: scale(1.15) translateY(-4px) !important;
+    box-shadow: 0 15px 30px -5px rgba(0, 0, 0, 0.15) !important;
+    z-index: 10;
 }
 
 #modal-gallery img {
@@ -31,9 +58,11 @@
     object-fit: cover; /* Keeps the whole screenshot visible */
     scroll-snap-align: center;
 }
+
 .scrollbar-hide::-webkit-scrollbar {
     display: none;
 }
+
 .scrollbar-hide {
     -ms-overflow-style: none;
     scrollbar-width: none;
