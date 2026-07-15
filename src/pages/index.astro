@@ -5,11 +5,9 @@ import ExperienceItem from '../components/ExperienceItem.astro';
 import CourseCard from '../components/CourseCard.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 
-
 import { Image } from 'astro:assets';
 import bryanSuit from '../assets/img/Bryan_Suit.jpg';
 import facingForward from '../assets/img/Facing_forward.jpg';
-
 
 const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
 
@@ -66,11 +64,76 @@ const myProjects = [
         award: "3rd Place - SJU Hacks"
     },
     {
-        id: "dragon-bot-v2", // Add a unique ID for each
+        id: "freelance-web-development", 
+        title: "Freelance Web Development",
+        video: "/videos/seasaide.mp4", 
+        description: "A collection of custom websites I built for clients, businesses, and personal brands using modern web technologies. Each project being tailored to their specific needs and goals. Learn more about the projects below.",
+        fullDescription: `
+            <div class="space-y-4">
+                <p class="text-sm text-slate-600">A showcase of custom websites I have built. Select a project below, then use the tabs at the top of the video player to toggle between the live site and its CMS dashboard.</p>
+
+                <div class="flex flex-wrap gap-2 border-b border-slate-200 pb-3 mb-4">
+                    <div class="freelance-project-tab cursor-pointer bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" data-project="seasaide">Seasaide</div>
+                    <div class="freelance-project-tab cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" data-project="sound-archives">Sound Archives</div>
+                </div>
+
+                <div id="desc-seasaide-front" class="freelance-desc block space-y-4 animate-fade-in">
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Seasaide: Personal Creative Hub</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Developed a custom-tailored personal hub to showcase client's personal identity. The site acts as a <strong>unified archive</strong> for blogs, media, and projects.
+                        <br><br>
+                        Additionally featuring live integration with Spotify's API for real-time music and listening activity display. The background has falling sakura leaves as requested by the client.
+                    </p>
+                    <div class="bg-green-100 border-l-4 border-green-600 p-3 rounded-r-lg">
+                        <p class="text-green-500 italic font-medium">Check out the sanity.io backend where client's can manage their content without touching any code.</p>
+                    </div>
+                </div>
+
+                <div id="desc-seasaide-back" class="freelance-desc hidden space-y-4 animate-fade-in">
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Seasaide: CMS Dashboard</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        Integrated with Sanity.io dashboard allowing where the client can adjust the site's content, add new blog posts, add songs or projects, and manage media without touching any code.
+                        <br>
+                        The dashboard is fully customized and almost all the text, images, and media on the site can be changed based on the client's needs.
+                    </p>
+                    <div class="bg-green-100 border-l-4 border-green-600 p-3 rounded-r-lg mt-4">
+                        <p class="text-green-500 text-xs font-medium">Takes up to 3 minutes for the site to update changes meaning very little downtime.</p>
+                    </div>
+                </div>
+
+                <div id="desc-sa-front" class="freelance-desc hidden space-y-4 animate-fade-in">
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Sound Archives</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        A portfolio site designed for a client to showcase their collection of audio projects. It features a real-time audio visualizer platform synchronized with the global music player at the bottom of the webpage.
+                        <br><br>
+                        The visualizer is built with the audio analyzer and mapped to the frequency spectrum of the audio being played. The global player is a complete list of all audio tracks added on by the client in the album section.
+                    </p>
+                    <div class="bg-red-100 border-l-4 border-red-600 p-3 rounded-r-lg mt-4">
+                        <p class="text-red-500 text-xs font-medium">Check the dashboard tab to see how albums are created & songs added to the global player.</p>
+                    </div>
+                </div>
+
+                <div id="desc-sa-back" class="freelance-desc hidden space-y-4 animate-fade-in">
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Sound Archives: CMS</h4>
+                    <p class="text-sm text-slate-600 leading-relaxed">
+                        The Sanity.io dashboard backend allows client to be able to edit content on their profiles, gallery, and add their own audio tracks to the site.
+                        <br> The audio visualizer will dynamically change with every song added.
+                    </p>
+                    <div class="bg-indigo-50 border-l-4 border-indigo-600 p-3 rounded-r-lg mt-4">
+                        <p class="text-indigo-700 text-xs font-medium">Audio file uploads automatically populate the global player in real-time.</p>
+                    </div>
+                </div>
+            </div>
+        `,
+        link: "https://github.com/Keepas3",
+        techStack: "Next.js | Sanity.io | Astro | Tailwind CSS"
+    },
+    {
+        id: "dragon-bot-v2",
         title: "Dragon Bot 2.0",
         videoBot: "/videos/Bot_Demo.mp4",
         videoWeb: "/videos/Video_Demo.mp4",
-        description: `A Discord Bot providing real-time clan tracking, smart war & raid reminders with automatic notifications. 
+        description: `A Discord Bot providing real-time clan tracking, smart war & raid reminders with automatic notifications.
                       Includes a direct feed to the latest leaks and news from Reddit.`,
         fullDescription: `
         <div class="space-y-4">
@@ -135,43 +198,9 @@ const myProjects = [
     `,
         link: "https://github.com/Keepas3/VideoRecap-HeadStarterHackathon",
         techStack: "Python | OpenRouterAI | HTML/CSS | Hugging Face Transformer"
-    },
-   // {
-        // id: "youtube-saver", 
-        // title: "YouTube Saver",
-        // video: "/videos/youtube-saver-demo.mp4",
-        // description: `An application designed to download YouTube videos and convert MP4 files to Flac. 
-        //               Features a clean interface for URL submissions and automated file output.`,
-        // fullDescription: `YouTube Saver is an application designed to download YouTube videos and convert MP4 files to Flac. 
-        //               It features a clean interface for URL submissions and automated file output.`,
-        // link: "https://github.com/Keepas3/YouTube-Saver",
-        // techStack: "Python | HTML/CSS | Javascript"
-  //  },
-    {
-        id: "portfolio-website", 
-        title: "Portfolio Website",
-        video: "/videos/old_website.mp4",
-        description: `The website you are currently viewing! Rebuilt with Astro and Tailwind CSS to showcase my work and journey as a software developer.`,
-        fullDescription: `
-        <div class="space-y-4">
-            <p>The website you are currently viewing! <strong>Astro-powered</strong> and written in <strong>TypeScript</strong>  and <strong>Tailwind CSS</strong>. 
-            I rebuilt this from the ground up to move away from static HTML/CSS toward a more dynamic architecture.</p>
-            
-            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Key Improvements</h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                <li><strong>Responsive Design:</strong> Built with <strong>Tailwind CSS</strong> for a seamless experience for mobile and desktop.</li>
-                <li><strong>Typed Components:</strong> Used <strong>TypeScript</strong> to build reusable UI components (like the very modal you are reading right now).</li>
-            </ul>
-
-            <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
-                <p class="text-blue-700 text-xs font-medium italic">Check out the side-by-side video to see the evolution from the legacy version to this modern build.</p>
-            </div>
-        </div>
-    `,
-        link: "https://github.com/Keepas3/Portfolio-Website",
-        techStack: "Astro | Tailwind CSS | Vercel | JavaScript"
     }
 ];
+
 const experienceData = [
     {
         title: "Data Analyst",
@@ -210,6 +239,7 @@ const experienceData = [
         ]
     }
 ];
+
 const courses = [
     { name: "Software Engineering", code: "CUS 1166", iconPath: "/src/assets/img/SE_icon.png" },
     { name: "Analysis of Algorithms", code: "CUS 1188", iconPath: "/src/assets/img/algorithms_icon.png" },
@@ -220,258 +250,196 @@ const courses = [
     { name: "Networking", code: "NET 1011", iconPath: "/src/assets/img/networking_icon.png" },
     { name: "Intro to Artificial Intelligence", code: "CUS 1174", iconPath: "/src/assets/img/AI_icon.png" },
     { name: "Advanced Data Structures", code: "CUS 1151", iconPath: "/src/assets/img/data_structures.png" }
-
 ];
 ---
 
-
 <MainLayout title="Bryan Fung | Software Engineer">
-    <section class="min-h-screen flex flex-col md:flex-row items-center justify-center container mx-auto px-6 gap-12">
+    <section class="min-h-screen flex flex-col md:flex-row items-center justify-center container mx-auto px-6 gap-12 transition-colors duration-300">
         <div class="reveal flex-1 text-center md:text-left">
-            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight">
+            <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-slate-900 dark:text-white">
                 Welcome,<br>I'm <span class="text-blue-600">Bryan Fung</span>
             </h1>
-            <p class="text-xl text-slate-600 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. </p>
+            <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. </p>
             <div class="mt-10 flex gap-4 justify-center md:justify-start">
                 <a 
                     href="/Bryan_Fung_Resume.pdf" 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 text-white rounded-full font-bold hover:bg-blue-600 shadow-xl shadow-slate-200 transition-all active:scale-95 group"
+                    class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:bg-blue-600 dark:hover:bg-blue-50 transition-all active:scale-95 group"
                 >
                     <span>View Resume</span>
                     <i class='bx bx-link-external text-lg group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'></i>
                 </a>
                 <div class="flex items-center gap-4 text-3xl">
-                    <a href="https://github.com/Keepas3" class="hover:text-blue-600" 
-                    target ="_blank"
-                    rel="noopener noreferrer">
-                    <i class='bx bxl-github'></i></a>
-                    <a href="https://www.linkedin.com/in/bryan-fung-a2a089256/" class="hover:text-blue-500 transition-colors" target ="_blank"
-                    rel="noopener">
-                    <i class='bx bxl-linkedin'></i></a>
+                    <a href="https://github.com/Keepas3" class="text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors" target ="_blank" rel="noopener noreferrer">
+                        <i class='bx bxl-github'></i>
+                    </a>
+                    <a href="https://www.linkedin.com/in/bryan-fung-a2a089256/" class="text-slate-900 dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors" target ="_blank" rel="noopener">
+                        <i class='bx bxl-linkedin'></i>
+                    </a>
                 </div>
             </div>
         </div>
         <div class="reveal flex-1">
-    <Image 
-        src={bryanSuit} 
-        alt="Bryan Fung" 
-        class="rounded-3xl shadow-2xl w-full max-w-md mx-auto-0 transition-all duration-800"
-    />
-</div>
+            <Image 
+                src={bryanSuit} 
+                alt="Bryan Fung" 
+                class="rounded-3xl shadow-2xl w-full max-w-md mx-auto-0 transition-all duration-800 border-4 border-transparent dark:border-slate-800"
+            />
+        </div>
     </section>
-    <section id="about" class="py-24 bg-white">
-    <div class="container mx-auto px-6 max-w-6xl">
-        <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
-            
-            <div class="reveal flex-1 w-full max-w-md">
-                <div class="relative group">
-                    <div class="absolute -inset-4 bg-blue-50 rounded-[2rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
+
+    <section id="about" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
+                <div class="reveal flex-1 w-full max-w-md">
+                    <div class="relative group">
+                        <div class="absolute -inset-4 bg-blue-50 dark:bg-blue-900/20 rounded-[2rem] -rotate-3 group-hover:rotate-0 transition-transform duration-500"></div>
+                        <Image 
+                            src={facingForward} 
+                            alt="Bryan Fung Portrait" 
+                            class="relative rounded-3xl shadow-xl w-full h-auto object-cover border-4 border-white dark:border-slate-800 transition-colors duration-300"
+                        />
+                    </div>
+                </div>
+
+                <div class="reveal flex-1">
+                    <h2 class="text-sm font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">About Me</h2>
+                    <h3 class="text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors duration-300">
+                        Aspiring Software Developer <br class="hidden lg:block"> & Engineer based in NYC
+                    </h3>
                     
-                    <Image 
-                        src={facingForward} 
-                        alt="Bryan Fung Portrait" 
-                        class="relative rounded-3xl shadow-xl w-full h-auto object-cover border-4 border-white"
-                    />
-                </div>
-            </div>
-
-            <div class="reveal flex-1">
-                <h2 class="text-sm font-black uppercase tracking-widest text-blue-600 mb-3">About Me</h2>
-                <h3 class="text-4xl font-bold text-slate-900 mb-6 leading-tight">
-                    Aspiring Software Developer <br class="hidden lg:block"> & Engineer based in NYC
-                </h3>
-                
-                <div class="space-y-4 text-slate-600 leading-relaxed">
-                    <p>
-                        I am eager to hone my skills and contribute to innovative projects that make a difference. 
-                        Born and raised in New York City, I developed a passion for technology that led me to 
-                        St. John's University, where I recently graduated with my <strong>Bachelor's degree in Computer Science</strong>.
-                    </p>
-                    <p>
-                        Outside of work and academics, I enjoy travelling, reading an interesting book, 
-                        or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York.
-                        I’m a big believer in staying active and using sports to keep my competitive edge sharp.
-                    </p>
-                    <p class="font-medium text-slate-900">
-                        Currently focusing on <span class="text-blue-600">Tempo C++</span> and <span class="text-blue-600">Dragon Bot 2.0</span>,
-                        projects that you can check out below. I’m always open to connecting, so feel free to reach out if you’d like to chat about potential opportunities or just want to say hi!
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-2 gap-6 mt-10 border-t border-slate-100 pt-8">
-                    <div>
-                        <p class="text-2xl font-bold text-slate-900">Core Languages
+                    <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed transition-colors duration-300">
+                        <p>
+                            I am eager to hone my skills and contribute to innovative projects that make a difference. 
+                            Born and raised in New York City, I developed a passion for technology that led me to 
+                            St. John's University, where I recently graduated with my <strong>Bachelor's degree in Computer Science</strong>.
                         </p>
-                        <p class="text-xs text-balance uppercase tracking-wide text-slate-400 font-medium">
-                        Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust
+                        <p>
+                            Outside of work and academics, I enjoy travelling, reading an interesting book, 
+                            or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York.
+                            I’m a big believer in staying active and using sports to keep my competitive edge sharp.
+                        </p>
+                        <p class="font-medium text-slate-900 dark:text-white transition-colors duration-300">
+                            Currently focusing on <span class="text-blue-600 dark:text-blue-400">Tempo C++</span> and <span class="text-blue-600 dark:text-blue-400">Dragon Bot 2.0</span>,
+                            projects that you can check out below. I’m always open to connecting, so feel free to reach out if you’d like to chat about potential opportunities or just want to say hi!
                         </p>
                     </div>
-                    <div>
-                        <p class="text-2xl font-bold text-slate-900">9+</p>
-                        <p class="text-xs uppercase tracking-wide text-slate-400 font-bold">Projects Built</p>
+
+                    <div class="grid grid-cols-2 gap-6 mt-10 border-t border-slate-100 dark:border-slate-800 pt-8 transition-colors duration-300">
+                        <div>
+                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">Core Languages</p>
+                            <p class="text-xs text-balance uppercase tracking-wide text-slate-400 dark:text-slate-500 font-medium transition-colors duration-300">
+                            Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust
+                            </p>
+                        </div>
+                        <div>
+                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">9+</p>
+                            <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold transition-colors duration-300">Projects Built</p>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
-    </div>
-</section>
+    </section>
 
-   <section id="Skills" class="py-16 bg-slate-50 border-y border-slate-100">
-    <div class="max-w-4xl mx-auto px-6 text-center">
-        
-        <p class="text-[10px] uppercase tracking-widest text-slate-400 font-bold mb-6">My Core Toolkit</p>
-        
-        <div class="relative w-full mx-auto overflow-hidden" 
-             style="-webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);">
+    <section id="Skills" class="py-16 bg-slate-50 dark:bg-slate-800/50 border-y border-slate-100 dark:border-slate-800/50 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <p class="text-[10px] uppercase tracking-widest text-slate-400 dark:text-slate-500 font-bold mb-6 transition-colors duration-300">My Core Toolkit</p>
+            <div class="relative w-full mx-auto overflow-hidden" 
+                 style="-webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent); mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);">
+                <div class="flex w-max animate-infinite-scroll gap-6 px-4 py-4">
+                    <div class="flex gap-6 items-center">
+                        <div data-context="Configured cloud infrastructure and databases to support scalable application deployments." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/aws.png" alt="AWS" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Containerized deployments for Dragon Bot 2.0 to prevent conflicts across environments." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/docker.png" alt="Docker" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Integrated Firebase for real-time data handling and backend services in web applications." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/firebase.png" alt="Firebase" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Leveraged Google Cloud platforms to manage scalable systems and cloud databases." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/googlecloud.png" alt="Google Cloud" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Architected MySQL databases for persistent data storage for Vehicular Cloud real-time system and Dragon Bot 2.0." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/mySQL.png" alt="MySQL" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Developed robust Java-based backend infrastructure using the Spring Boot framework." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/springboot.png" alt="Spring Boot" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Implemented utility-first Tailwind CSS to build responsive interfaces for my AdaptIQ add-in." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/tailwind.png" alt="Tailwind CSS" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Utilized React to construct the interactive frontend for the AdaptIQ PowerPoint add-in." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/react.png" alt="React" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Automated deployment and continuous integration pipelines for Dragon Bot 2.0." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/railway.png" alt="Railway" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Used for building and deploying webpages such as SJU Campus Hub, Dragon Bot 2.0 and this website." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/vercel.png" alt="Vercel" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Programmed backends for Video Recap, Dragon Bot 2.0, and Youtube Saver using Python." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/python.png" alt="Python" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Engineered asynchronous web services and web application backends using Node.js." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
+                        </div>
+                    </div>
+
+                    <div class="flex gap-6 items-center">
+                        <div data-context="Configured cloud infrastructure and databases to support scalable application deployments." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/aws.png" alt="AWS" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Containerized deployments for Dragon Bot 2.0 to prevent conflicts across environments." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/docker.png" alt="Docker" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Integrated Firebase for real-time data handling and backend services in web applications." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/firebase.png" alt="Firebase" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Leveraged Google Cloud platforms to manage scalable systems and cloud databases." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/googlecloud.png" alt="Google Cloud" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Architected MySQL databases for persistent data storage for Vehicular Cloud real-time system and Dragon Bot 2.0." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/mySQL.png" alt="MySQL" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Developed robust Java-based backend infrastructure using the Spring Boot framework." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/springboot.png" alt="Spring Boot" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Implemented utility-first Tailwind CSS to build responsive interfaces for my AdaptIQ add-in." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/tailwind.png" alt="Tailwind CSS" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Utilized React to construct the interactive frontend for the AdaptIQ PowerPoint add-in." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/react.png" alt="React" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Automated deployment and continuous integration pipelines for Dragon Bot 2.0." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/railway.png" alt="Railway" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Managed complex relational databases and optimized data queries for high-performance applications." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/vercel.png" alt="Vercel" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Programmed backends for Video Recap, Dragon Bot 2.0, and Youtube Saver using Python." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/python.png" alt="Python" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Engineered asynchronous web services and web application backends using Node.js." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
+                        </div>
+                    </div>
+                </div>
+            </div>
             
-            <div class="flex w-max animate-infinite-scroll gap-6 px-4 py-4">
-                
-                <div class="flex gap-6 items-center">
-                    
-                    <div data-context="Configured cloud infrastructure and databases to support scalable application deployments." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/aws.png" alt="AWS" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Containerized deployments for Dragon Bot 2.0 to prevent conflicts across environments." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/docker.png" alt="Docker" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Integrated Firebase for real-time data handling and backend services in web applications." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/firebase.png" alt="Firebase" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Leveraged Google Cloud platforms to manage scalable systems and cloud databases." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/googlecloud.png" alt="Google Cloud" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Architected MySQL databases for persistent data storage for Vehicular Cloud real-time system and Dragon Bot 2.0." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/mySQL.png" alt="MySQL" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Developed robust Java-based backend infrastructure using the Spring Boot framework." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/springboot.png" alt="Spring Boot" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Implemented utility-first Tailwind CSS to build responsive interfaces for my AdaptIQ add-in." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/tailwind.png" alt="Tailwind CSS" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Utilized React to construct the interactive frontend for the AdaptIQ PowerPoint add-in." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/react.png" alt="React" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Automated deployment and continuous integration pipelines for Dragon Bot 2.0." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/railway.png" alt="Railway" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Used for building and deploying webpages such as SJU Campus Hub, Dragon Bot 2.0 and this website." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/vercel.png" alt="Vercel" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Programmed backends for Video Recap, Dragon Bot 2.0, and Youtube Saver using Python." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/python.png" alt="Python" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Engineered asynchronous web services and web application backends using Node.js." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
-                    </div>
-                    
-                </div>
-
-                <!-- Group 2 will be the buffer -->
-                <div class="flex gap-6 items-center">
-                    
-                    <div data-context="Configured cloud infrastructure and databases to support scalable application deployments." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/aws.png" alt="AWS" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Containerized deployments for Dragon Bot 2.0 to prevent conflicts across environments." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/docker.png" alt="Docker" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Integrated Firebase for real-time data handling and backend services in web applications." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/firebase.png" alt="Firebase" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Leveraged Google Cloud platforms to manage scalable systems and cloud databases." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/googlecloud.png" alt="Google Cloud" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Architected MySQL databases for persistent data storage for Vehicular Cloud real-time system and Dragon Bot 2.0." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/mySQL.png" alt="MySQL" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Developed robust Java-based backend infrastructure using the Spring Boot framework." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/springboot.png" alt="Spring Boot" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Implemented utility-first Tailwind CSS to build responsive interfaces for my AdaptIQ add-in." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/tailwind.png" alt="Tailwind CSS" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Utilized React to construct the interactive frontend for the AdaptIQ PowerPoint add-in." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/react.png" alt="React" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Automated deployment and continuous integration pipelines for Dragon Bot 2.0." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/railway.png" alt="Railway" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Managed complex relational databases and optimized data queries for high-performance applications." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/vercel.png" alt="Vercel" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Programmed backends for Video Recap, Dragon Bot 2.0, and Youtube Saver using Python." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/python.png" alt="Python" class="w-14 h-14 object-contain" />
-                    </div>
-
-                    <div data-context="Engineered asynchronous web services and web application backends using Node.js." 
-                        class="hover-icon flex items-center justify-center w-20 h-20 bg-white rounded-full shadow-sm border border-slate-200 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
-                        <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
-                    </div>
-                </div>
-                
+            <div class="h-10 mt-6 flex items-center justify-center">
+                <p id="toolkit-label" class="text-sm text-slate-500 dark:text-slate-400 font-medium transition-opacity duration-300">
+                    Hover over a tool to see how I use it.
+                </p>
             </div>
         </div>
-        
-        <div class="h-10 mt-6 flex items-center justify-center">
-            <p id="toolkit-label" class="text-sm text-slate-500 font-medium transition-opacity duration-300">
-                Hover over a tool to see how I use it.
-            </p>
-        </div>
+    </section>
 
-    </div>
-</section>
-
-    <section id="projects" class="py-24 bg-slate-100">
+    <section id="projects" class="py-24 bg-slate-100 dark:bg-slate-800 transition-colors duration-300">
         <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+            <h2 class="text-4xl font-bold mb-12 text-center text-slate-900 dark:text-white transition-colors duration-300">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 whitespace-pre-line">
                 {myProjects.map((project) => (
                     <ProjectCard {...project} />
@@ -479,92 +447,98 @@ const courses = [
             </div>
         </div>
         <div class="mt-16 text-center">
-    <a href="https://github.com/Keepas3?tab=repositories" target="_blank"rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-white border border-slate-200 rounded-full font-bold text-slate-900 hover:bg-slate-50 hover:border-blue-300 transition-all group">
-        <span>View More on GitHub</span>
-        <i class='bx bxl-github text-xl group-hover:rotate-12 transition-transform'></i>
-    </a>
-</div>
+            <a href="https://github.com/Keepas3?tab=repositories" target="_blank"rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group">
+                <span>View More on GitHub</span>
+                <i class='bx bxl-github text-xl group-hover:rotate-12 transition-transform'></i>
+            </a>
+        </div>
     </section>
-	<section id="experience" class="py-24 bg-white">
-    <div class="container mx-auto px-6 max-w-4xl">
-        <h2 class="text-4xl font-bold mb-16 text-center">Professional Experience</h2>
-        
-        <div class="flex flex-col">
-            {experienceData.map((item) => (
-                <ExperienceItem {...item} />
-            ))}
-        </div>
-    </div>
-    <ProjectModal />
-</section>
 
-
-
-<section id="education" class="py-24 bg-slate-50">
-    <div class="container mx-auto px-6 max-w-5xl">
-        <h2 class="text-4xl font-bold mb-16 text-center">Education</h2>
-        
-        <div class="bg-white p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 mb-12 flex flex-col md:flex-row justify-between items-start gap-8">
-            <div>
-                <h3 class="text-3xl font-bold text-slate-900 mb-2">St. John's University</h3>
-                <p class="text-xl text-blue-600 font-semibold mb-4">B.S. in Computer Science</p>
-                <ul class="space-y-2 text-slate-600">
-                    <li class="flex items-center gap-2"><i class='bx bxs-star text-yellow-500'></i> GPA: 3.73 (Magna Cum Laude)</li>
-                    <li class="flex items-center gap-2"><i class='bx bxs-award text-blue-500'></i> Dean's List (6 Consecutive Semesters)</li>
-                    <li class="flex items-center gap-2"><i class='bx bxs-graduation text-slate-500'></i> Class of 2026</li>
-                </ul>
-            </div>
-            <div class="text-right">
-                <p class="text-slate-400 font-mono text-sm uppercase tracking-widest">Queens, NY</p>
+    <section id="experience" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-4xl font-bold mb-16 text-center text-slate-900 dark:text-white transition-colors duration-300">Professional Experience</h2>
+            <div class="flex flex-col">
+                {experienceData.map((item) => (
+                    <ExperienceItem {...item} />
+                ))}
             </div>
         </div>
+        <ProjectModal />
+    </section>
 
-        <h3 class="text-2xl font-bold mb-8 text-slate-800">Key Coursework</h3>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {courses.map(course => (
-                <CourseCard {...course} />
-            ))}
-        </div>
-    </div>
-</section>
-<section id="contact" class="py-24 bg-white">
-    <div class="container mx-auto px-6 max-w-4xl">
-        <h2 class="text-4xl font-bold mb-4 text-center text-slate-900">Get In Touch</h2>
-        <p class="text-center text-slate-600 mb-16 max-w-2xl mx-auto">
-            I’d be happy to connect! Whether you’d like to discuss a project, 
-            inquire about my work, or simply reach out, feel free to contact me.
-        </p>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-            
-            <a href="mailto:bryanfung61@gmail.com" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
-                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class='bx bx-envelope text-3xl'></i>
+    <section id="education" class="py-24 bg-slate-50 dark:bg-slate-800/50 transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-4xl font-bold mb-16 text-center text-slate-900 dark:text-white transition-colors duration-300">Education</h2>
+            <div class="bg-white dark:bg-slate-800 p-8 md:p-12 rounded-3xl shadow-sm border border-slate-100 dark:border-slate-700 mb-12 flex flex-col md:flex-row justify-between items-start gap-8 transition-colors duration-300">
+                <div>
+                    <h3 class="text-3xl font-bold text-slate-900 dark:text-white mb-2 transition-colors duration-300">St. John's University</h3>
+                    <p class="text-xl text-blue-600 dark:text-blue-400 font-semibold mb-4 transition-colors duration-300">B.S. in Computer Science</p>
+                    <ul class="space-y-2 text-slate-600 dark:text-slate-300 transition-colors duration-300">
+                        <li class="flex items-center gap-2"><i class='bx bxs-star text-yellow-500'></i> GPA: 3.73 (Magna Cum Laude)</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-award text-blue-500'></i> Dean's List (6 Consecutive Semesters)</li>
+                        <li class="flex items-center gap-2"><i class='bx bxs-graduation text-slate-500 dark:text-slate-400'></i> Class of 2026</li>
+                    </ul>
                 </div>
-                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Email</h3>
-                <p class="text-xl font-bold text-slate-900">bryanfung61@gmail.com</p>
-            </a>
-
-            <a href="tel:3473251321" class="group p-8 bg-slate-50 rounded-3xl border border-slate-100 hover:border-blue-200 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
-                <div class="w-16 h-16 bg-white rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
-                    <i class='bx bx-phone text-3xl'></i>
+                <div class="text-right">
+                    <p class="text-slate-400 dark:text-slate-500 font-mono text-sm uppercase tracking-widest transition-colors duration-300">Queens, NY</p>
                 </div>
-                <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 mb-2">Phone</h3>
-                <p class="text-xl font-bold text-slate-900">(347) 325-1321</p>
-            </a>
+            </div>
 
-            
-
+            <h3 class="text-2xl font-bold mb-8 text-slate-800 dark:text-white transition-colors duration-300">Key Coursework</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {courses.map(course => (
+                    <CourseCard {...course} />
+                ))}
+            </div>
         </div>
-    </div>
-</section>
+    </section>
 
+    <section id="contact" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-4xl">
+            <h2 class="text-4xl font-bold mb-4 text-center text-slate-900 dark:text-white transition-colors duration-300">Get In Touch</h2>
+            <p class="text-center text-slate-600 dark:text-slate-300 mb-16 max-w-2xl mx-auto transition-colors duration-300">
+                I’d be happy to connect! Whether you’d like to discuss a project, 
+                inquire about my work, or simply reach out, feel free to contact me.
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <a href="mailto:bryanfung61@gmail.com" class="group p-8 bg-slate-50 dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                    <div class="w-16 h-16 bg-white dark:bg-slate-700 rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class='bx bx-envelope text-3xl dark:text-white'></i>
+                    </div>
+                    <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2">Email</h3>
+                    <p class="text-xl font-bold text-slate-900 dark:text-white transition-colors duration-300">bryanfung61@gmail.com</p>
+                </a>
+                <a href="tel:3473251321" class="group p-8 bg-slate-50 dark:bg-slate-800 rounded-3xl border border-slate-100 dark:border-slate-700 hover:border-blue-200 dark:hover:border-blue-500 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 text-center">
+                    <div class="w-16 h-16 bg-white dark:bg-slate-700 rounded-2xl shadow-sm flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                        <i class='bx bx-phone text-3xl dark:text-white'></i>
+                    </div>
+                    <h3 class="text-sm font-black uppercase tracking-widest text-slate-400 dark:text-slate-500 mb-2">Phone</h3>
+                    <p class="text-xl font-bold text-slate-900 dark:text-white transition-colors duration-300">(347) 325-1321</p>
+                </a>
+            </div>
+        </div>
+    </section>
 </MainLayout>
+
 <script>
+// ==========================================
+// 1. DATA MAP FOR FREELANCE DYNAMIC TOP TABS
+// ==========================================
+const freelanceProjectsData = {
+    "seasaide": [
+        { label: "Live Site", video: "/videos/seasaide.mp4", target: "desc-seasaide-front" },
+        { label: "Backend", video: "/videos/seasaide_backend.mp4", target: "desc-seasaide-back" }
+    ],
+    "sound-archives": [
+        { label: "Live Site", video: "/videos/sound-archives.mp4", target: "desc-sa-front" },
+        { label: "Dashboard", video: "/videos/sound_archives_backend.mp4", target: "desc-sa-back" }
+    ]
+};
+
 document.addEventListener("DOMContentLoaded", () => {
     
     /* =========================================
-       1. TOOLKIT HOVER LOGIC
+       2. TOOLKIT HOVER LOGIC (UPDATED FOR DARK MODE)
        ========================================= */
     const icons = document.querySelectorAll('.hover-icon');
     const label = document.getElementById('toolkit-label');
@@ -575,22 +549,19 @@ document.addEventListener("DOMContentLoaded", () => {
             icon.addEventListener('mouseenter', () => {
                 const context = icon.getAttribute('data-context');
                 label.style.opacity = '0'; 
-                
                 setTimeout(() => {
                     label.textContent = context;
-                    label.classList.remove('text-slate-500');
-                    label.classList.add('text-slate-800', 'font-semibold'); 
+                    label.classList.remove('text-slate-500', 'dark:text-slate-400');
+                    label.classList.add('text-slate-800', 'dark:text-white', 'font-semibold'); 
                     label.style.opacity = '1';
                 }, 150); 
             });
-
             icon.addEventListener('mouseleave', () => {
                 label.style.opacity = '0';
-                
                 setTimeout(() => {
                     label.textContent = defaultText;
-                    label.classList.remove('text-slate-800', 'font-semibold');
-                    label.classList.add('text-slate-500'); 
+                    label.classList.remove('text-slate-800', 'dark:text-white', 'font-semibold');
+                    label.classList.add('text-slate-500', 'dark:text-slate-400'); 
                     label.style.opacity = '1';
                 }, 150);
             });
@@ -598,7 +569,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     /* =========================================
-       2. PROJECT MODAL LOGIC
+       3. PROJECT MODAL LOGIC & UI ELEMENTS
        ========================================= */
     const modal = document.querySelector('#project-modal');
     const modalVideo = document.querySelector('#modal-video');
@@ -619,61 +590,133 @@ document.addEventListener("DOMContentLoaded", () => {
     const prevBtn = document.querySelector('#prev-img');
     const nextBtn = document.querySelector('#next-img');
 
-    let activeCard = null; // Removed the TypeScript ': Element | null'
+    let activeCard = null;
 
-    // THE MAIN OPEN LOGIC
+    function renderTopTabs(projectKey) {
+        const tabsData = freelanceProjectsData[projectKey];
+        if (!tabsData) return;
+
+        let customTabsContainer = document.getElementById('injected-custom-tabs');
+        if (!customTabsContainer && ecosystemTabs) {
+            customTabsContainer = document.createElement('div');
+            customTabsContainer.id = 'injected-custom-tabs';
+            customTabsContainer.className = 'flex gap-2 ml-2';
+            ecosystemTabs.parentNode.insertBefore(customTabsContainer, ecosystemTabs.nextSibling);
+        }
+
+        if (customTabsContainer) customTabsContainer.innerHTML = '';
+        if (ecosystemTabs) ecosystemTabs.style.display = 'none';
+
+        tabsData.forEach((tab, index) => {
+            const btn = document.createElement('button');
+            
+            btn.className = index === 0 
+                ? 'custom-video-btn bg-white/20 text-white px-3 py-1 rounded-md border border-gray-500 text-sm font-medium transition-colors' 
+                : 'custom-video-btn bg-transparent hover:bg-white/10 text-white/70 px-3 py-1 rounded-md border border-gray-600 text-sm font-medium transition-colors';
+            
+            btn.textContent = tab.label;
+            
+            btn.onclick = () => {
+                const allBtns = customTabsContainer.querySelectorAll('.custom-video-btn');
+                allBtns.forEach(b => {
+                    b.className = 'custom-video-btn bg-transparent hover:bg-white/10 text-white/70 px-3 py-1 rounded-md border border-gray-600 text-sm font-medium transition-colors';
+                });
+                btn.className = 'custom-video-btn bg-white/20 text-white px-3 py-1 rounded-md border border-gray-500 text-sm font-medium transition-colors';
+
+                if (modalVideoSource && modalVideo) {
+                    showView('video');
+                    modalVideoSource.src = tab.video;
+                    modalVideo.load();
+                    const playPromise = modalVideo.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => console.log("Playback prevented: ", error));
+                    }
+                }
+
+                if (modalDesc) {
+                    const allDescs = modalDesc.querySelectorAll('.freelance-desc');
+                    allDescs.forEach(d => {
+                        d.classList.remove('block');
+                        d.classList.add('hidden');
+                    });
+                    const targetDesc = modalDesc.querySelector('#' + tab.target);
+                    if (targetDesc) {
+                        targetDesc.classList.remove('hidden');
+                        targetDesc.classList.add('block');
+                    }
+                }
+            };
+            customTabsContainer.appendChild(btn);
+        });
+
+        if (customTabsContainer && customTabsContainer.firstChild) {
+            customTabsContainer.firstChild.click();
+        }
+    }
+
     projectCards.forEach((card) => {
         card.addEventListener('click', () => {
             activeCard = card; 
-            
-            // Always reset to Video view when opening a new project
             showView('video');
 
-            // Check for images to show/hide the Gallery toggle
+            const title = card.getAttribute('data-title') || '';
+            const githubLink = card.getAttribute('data-link') || '#';
+            const richDescription = card.querySelector('.hidden-full-desc') ? card.querySelector('.hidden-full-desc').innerHTML : '';
+            const videoBot = card.getAttribute('data-video-bot');
+            const videoWeb = card.getAttribute('data-video-web');
+            const defaultVideo = card.getAttribute('data-video') || videoBot || '';
+
             const gallerySource = card.querySelector('.hidden-gallery');
             const hasImages = gallerySource ? gallerySource.querySelectorAll('img').length > 0 : false;
             const galleryHTML = gallerySource ? gallerySource.innerHTML : '';
             
-            if (showGalleryBtn) {
-                showGalleryBtn.style.display = hasImages ? 'flex' : 'none';
-            }
-
-            // Inject images into the scrollable gallery div
+            if (showGalleryBtn) showGalleryBtn.style.display = hasImages ? 'flex' : 'none';
             if (modalGallery) {
                 modalGallery.innerHTML = galleryHTML;
                 modalGallery.scrollLeft = 0; 
             }
 
-            // Metadata Injection
-            const title = card.getAttribute('data-title') || '';
-            const githubLink = card.getAttribute('data-link') || '#';
-            const richDescription = card.querySelector('.hidden-full-desc') ? card.querySelector('.hidden-full-desc').innerHTML : '';
-            
-            const videoBot = card.getAttribute('data-video-bot');
-            const videoWeb = card.getAttribute('data-video-web');
-            const defaultVideo = card.getAttribute('data-video') || videoBot || '';
-
-            // Ecosystem Switcher (Bot/Web) Visibility
-            if (ecosystemTabs) {
-                ecosystemTabs.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
-            }
-
-            // Text Injection
             if (modalTitle) modalTitle.textContent = title;
             if (modalDesc) modalDesc.innerHTML = richDescription;
             if (modalGithub) modalGithub.href = githubLink;
 
-            // Video Source Handling
-            if (modalVideoSource && modalVideo) {
-                modalVideoSource.src = defaultVideo;
-                modalVideo.load();
+            let customTabsContainer = document.getElementById('injected-custom-tabs');
+            if (customTabsContainer) customTabsContainer.innerHTML = '';
+
+            if (title === "Freelance Web Development") {
+                renderTopTabs('seasaide');
+            } else {
+                if (ecosystemTabs) {
+                    ecosystemTabs.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
+                }
+                if (modalVideoSource && modalVideo) {
+                    modalVideoSource.src = defaultVideo;
+                    modalVideo.load();
+                }
             }
 
             if (modal) modal.showModal();
         });
     });
 
-    // HELPER FUNCTIONS (Removed the TypeScript 'type: ...' declarations)
+    if (modalDesc) {
+        modalDesc.addEventListener('click', (e) => {
+            const projectBtn = e.target.closest('.freelance-project-tab');
+            if (projectBtn) {
+                const allProjectBtns = modalDesc.querySelectorAll('.freelance-project-tab');
+                allProjectBtns.forEach(b => {
+                    b.classList.remove('bg-blue-100', 'text-blue-700');
+                    b.classList.add('bg-slate-100', 'text-slate-600');
+                });
+                projectBtn.classList.remove('bg-slate-100', 'text-slate-600');
+                projectBtn.classList.add('bg-blue-100', 'text-blue-700');
+
+                const projectKey = projectBtn.getAttribute('data-project');
+                renderTopTabs(projectKey);
+            }
+        });
+    }
+
     function showView(type) {
         if (type === 'video') {
             if (modalVideo) modalVideo.classList.remove('hidden');
@@ -700,13 +743,11 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // EVENT LISTENERS
     if (showVideoBtn) showVideoBtn.addEventListener('click', () => showView('video'));
     if (showGalleryBtn) showGalleryBtn.addEventListener('click', () => showView('gallery'));
     if (prevBtn) prevBtn.addEventListener('click', () => scrollGallery('prev'));
     if (nextBtn) nextBtn.addEventListener('click', () => scrollGallery('next'));
 
-    // Ecosystem Toggle Logic
     const ecoButtons = document.querySelectorAll('#ecosystem-tabs button');
     ecoButtons.forEach(btn => {
         btn.addEventListener('click', () => {
@@ -718,7 +759,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 showView('video'); 
                 modalVideoSource.src = videoSrc;
                 modalVideo.load();
-                modalVideo.play();
+                
+                const playPromise = modalVideo.play();
+                if (playPromise !== undefined) {
+                    playPromise.catch(error => console.log("Video playback prevented: ", error));
+                }
 
                 ecoButtons.forEach(b => b.classList.remove('bg-white/40', 'text-white'));
                 btn.classList.add('bg-white/40', 'text-white');
@@ -726,7 +771,6 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    // Cleanup & Close
     const closeModal = () => {
         if (modal) modal.close();
         if (modalVideo) modalVideo.pause();
