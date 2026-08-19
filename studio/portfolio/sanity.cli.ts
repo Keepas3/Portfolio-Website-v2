@@ -7,7 +7,6 @@ export default defineCliConfig({
   },
   deployment: {
     autoUpdates: true,
-    studioHost: 'bryandev-portfolio',
     appId: 't3hufc1wallwydoun9ebzmk8',
   },
 })
