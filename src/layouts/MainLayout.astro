@@ -3,6 +3,7 @@
 const { title = "BryanDev | Portfolio" } = Astro.props;
 import '../styles/global.css'; 
 import Navbar from '../components/Navbar.astro';
+import Analytics from '@vercel/analytics/astro'
 ---
 
 <!DOCTYPE html>
@@ -36,6 +37,7 @@ import Navbar from '../components/Navbar.astro';
     <i class='bx bx-sun hidden dark:block text-2xl'></i>
     <i class='bx bx-moon block dark:hidden text-2xl'></i>
 </button>
+
          <footer class="py-10 bg-slate-900 text-white text-center">
             <p class="text-xl font-bold mb-4">BryanDev</p>
             <div class="flex justify-center gap-6 mb-4 text-2xl">
@@ -62,5 +64,6 @@ import Navbar from '../components/Navbar.astro';
       }
   });
 </script>
+        <Analytics />
     </body>
 </html>
