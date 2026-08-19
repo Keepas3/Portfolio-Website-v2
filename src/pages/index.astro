@@ -76,9 +76,24 @@ const myProjects = [
                     <div class="freelance-project-tab cursor-pointer bg-blue-100 text-blue-700 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" data-project="seasaide">Seasaide</div>
                     <div class="freelance-project-tab cursor-pointer bg-slate-100 text-slate-600 hover:bg-slate-200 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors" data-project="sound-archives">Sound Archives</div>
                 </div>
-
+                <style>
+                .link-hover {
+                    color: #1d4ed8; 
+                    text-decoration: none; /* No underline */
+                    transition: color 0.3s ease; /* Smooth color change */
+                }
+                .link-hover:hover {
+                    color: #dc2626; /* Hover color (red) */
+                }
+                </style>
                 <div id="desc-seasaide-front" class="freelance-desc block space-y-4 animate-fade-in">
-                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Seasaide: Personal Creative Hub</h4>
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Seasaide:
+                    <a href="https://www.seasaide.cyou/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="link-hover">
+                        Visit Seasaide
+                    </a>     </h4>
                     <p class="text-sm text-slate-600 leading-relaxed">
                         Developed a custom-tailored personal hub to showcase client's personal identity. The site acts as a <strong>unified archive</strong> for blogs, media, and projects.
                         <br><br>
@@ -102,7 +117,13 @@ const myProjects = [
                 </div>
 
                 <div id="desc-sa-front" class="freelance-desc hidden space-y-4 animate-fade-in">
-                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Sound Archives</h4>
+                    <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Sound Archives:
+                    <a href="https://andrew-portfolio-ten-lac.vercel.app/" 
+                        target="_blank" 
+                        rel="noopener noreferrer" 
+                        class="link-hover">
+                        Visit Sound Archives
+                    </a>   </h4>
                     <p class="text-sm text-slate-600 leading-relaxed">
                         A portfolio site designed for a client to showcase their collection of audio projects. It features a real-time audio visualizer platform synchronized with the global music player at the bottom of the webpage.
                         <br><br>
