@@ -1,5 +1,6 @@
 ---
-// src/components/Navbar.astro
+import { getResumeUrl } from '../lib/sanity';
+const resumeUrl = (await getResumeUrl()) ?? '/Bryan_Fung_Resume.pdf';
 const navLinks = [
   { name: 'About', href: '/about' },
   { name: 'Projects', href: '/projects' },
@@ -21,7 +22,7 @@ const navLinks = [
                     {link.name}
                 </a>
             ))}
-            <a href="/Bryan_Fung_Resume.pdf" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-full hover:bg-blue-600 dark:hover:bg-blue-50 transition-all shadow-lg shadow-slate-200 dark:shadow-none group">
+            <a href={resumeUrl} target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-5 py-2 bg-slate-900 dark:bg-white text-white dark:text-slate-900 text-xs font-bold rounded-full hover:bg-blue-600 dark:hover:bg-blue-50 transition-all shadow-lg shadow-slate-200 dark:shadow-none group">
                 RESUME
                 <i class='bx bx-export text-sm group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'></i>
             </a>

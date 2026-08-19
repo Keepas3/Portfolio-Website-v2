@@ -6,11 +6,13 @@ import CourseCard from '../components/CourseCard.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import Contact from '../components/Contact.astro';
 
+import { getResumeUrl } from '../lib/sanity';
 import { Image } from 'astro:assets';
 import bryanSuit from '../assets/img/Bryan_Suit.jpg';
 import facingForward from '../assets/img/Facing_forward.jpg';
 
 const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
+const resumeUrl = (await getResumeUrl()) ?? '/Bryan_Fung_Resume.pdf';
 
 const myProjects = [
     {
@@ -284,7 +286,7 @@ const courses = [
             <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. </p>
             <div class="mt-10 flex gap-4 justify-center md:justify-start">
                 <a 
-                    href="/Bryan_Fung_Resume.pdf" 
+                    href={resumeUrl}
                     target="_blank" 
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:bg-blue-600 dark:hover:bg-blue-50 transition-all active:scale-95 group"

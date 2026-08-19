@@ -1,5 +1,7 @@
 ---
 import MainLayout from '../layouts/MainLayout.astro';
+import { getResumeUrl } from '../lib/sanity';
+const resumeUrl = (await getResumeUrl()) ?? '/Bryan_Fung_Resume.pdf';
 ---
 
 <MainLayout title="Resume | Bryan Fung">
@@ -7,7 +9,7 @@ import MainLayout from '../layouts/MainLayout.astro';
     <div class="flex justify-between items-center mb-12">
       <h1 class="text-4xl font-black">Resume</h1>
       <a 
-        href="/Bryan_Fung_Resume.pdf" 
+        href={resumeUrl}
         target="_blank" 
         class="px-6 py-3 bg-blue-600 text-white rounded-xl font-bold hover:bg-slate-900 transition-all shadow-lg flex items-center gap-2"
       >
