@@ -1,7 +1,26 @@
+export const prerender = false;
+
 import type { APIRoute } from 'astro';
 import { Resend } from 'resend';
+import { Redis } from '@upstash/redis';
+import { Ratelimit } from '@upstash/ratelimit';
 
+// Initialize Resend
 const resend = new Resend(import.meta.env.RESEND_API_KEY);
+
+// Initialize Upstash Redis client using strictly import.meta.env
+const redis = new Redis({
+  url: import.meta.env.UPSTASH_REDIS_REST_URL,
+  token: import.meta.env.UPSTASH_REDIS_REST_TOKEN,
+});
+
+// Configure Rate Limiter: Max 3 submissions per IP address every 1 hour
+const ratelimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(3, '1 h'),
+  analytics: true,
+  prefix: 'ratelimit:contact',
+});
 
 function escapeHtml(str: string) {
   return str
@@ -11,14 +30,41 @@ function escapeHtml(str: string) {
     .replace(/"/g, '&quot;');
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const POST: APIRoute = async ({ request, clientAddress }) => {
+  // 1. Identify client IP for rate limiting
+  const ip =
+    clientAddress ||
+    request.headers.get('x-forwarded-for')?.split(',')[0] ||
+    request.headers.get('x-real-ip') ||
+    '127.0.0.1';
+
+  // 2. Perform rate limit check before processing the request body
+  const { success, reset, remaining } = await ratelimit.limit(ip);
+
+  if (!success) {
+    return new Response(
+      JSON.stringify({
+        error: 'Too many contact form submissions. Please try again later.',
+      }),
+      {
+        status: 429,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-RateLimit-Reset': reset.toString(),
+          'X-RateLimit-Remaining': remaining.toString(),
+        },
+      }
+    );
+  }
+
+  // 3. Process email submission
   try {
     const { name, email, message } = await request.json();
 
     if (!name || !email || !message) {
       return new Response(
         JSON.stringify({ error: 'Missing required fields' }),
-        { status: 400 }
+        { status: 400, headers: { 'Content-Type': 'application/json' } }
       );
     }
 
@@ -42,14 +88,20 @@ export const POST: APIRoute = async ({ request }) => {
     });
 
     if (error) {
-      return new Response(JSON.stringify({ error }), { status: 500 });
+      return new Response(JSON.stringify({ error }), {
+        status: 500,
+        headers: { 'Content-Type': 'application/json' },
+      });
     }
 
-    return new Response(JSON.stringify({ success: true, data }), { status: 200 });
+    return new Response(
+      JSON.stringify({ success: true, data, remaining }),
+      { status: 200, headers: { 'Content-Type': 'application/json' } }
+    );
   } catch (err) {
     return new Response(
       JSON.stringify({ error: (err as Error).message }),
-      { status: 500 }
+      { status: 500, headers: { 'Content-Type': 'application/json' } }
     );
   }
 };

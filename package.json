@@ -2,9 +2,6 @@
   "name": "portfolio-website-v2",
   "type": "module",
   "version": "0.0.1",
-  "engines": {
-    "node": "22.x"
-  },
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -15,6 +12,8 @@
     "@astrojs/vercel": "^11.0.7",
     "@sanity/client": "^8.2.0",
     "@tailwindcss/vite": "^4.2.2",
+    "@upstash/ratelimit": "^2.0.8",
+    "@upstash/redis": "^1.38.2",
     "@vercel/analytics": "^2.0.1",
     "astro": "^7.2.4",
     "resend": "^6.20.0",

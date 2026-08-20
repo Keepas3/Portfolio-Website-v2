@@ -6,13 +6,22 @@ import CourseCard from '../components/CourseCard.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import Contact from '../components/Contact.astro';
 
-import { getResumeUrl } from '../lib/sanity';
+import { getSiteSettings } from '../lib/sanity';
 import { Image } from 'astro:assets';
 import bryanSuit from '../assets/img/Bryan_Suit.jpg';
 import facingForward from '../assets/img/Facing_forward.jpg';
 
 const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
-const resumeUrl = (await getResumeUrl()) ?? '/Bryan_Fung_Resume.pdf';
+const settings = await getSiteSettings();
+const resumeUrl = settings.resumeUrl ?? '/Bryan_Fung_Resume.pdf';
+const aboutHeadline = settings.aboutHeadline ?? 'Aspiring Software Developer & Engineer based in NYC';
+const aboutParagraphs = settings.aboutParagraphs ?? [
+  'I am eager to hone my skills and contribute to innovative projects that make a difference. Born and raised in New York City, I developed a passion for technology that led me to St. John\'s University, where I recently graduated with my Bachelor\'s degree in Computer Science.',
+  'Outside of work and academics, I enjoy travelling, reading an interesting book, or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York. I\'m a big believer in staying active and using sports to keep my competitive edge sharp.',
+  'Currently focusing on Digirips and Dragon Bot 2.0, projects that you can check out below. I\'m always open to connecting, so feel free to reach out if you\'d like to chat about potential opportunities or just want to say hi!',
+];
+const coreLanguages = settings.coreLanguages ?? 'Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust';
+const projectsBuilt = settings.projectsBuilt ?? '9+';
 
 const myProjects = [
     {
@@ -330,35 +339,24 @@ const courses = [
                 <div class="reveal flex-1">
                     <h2 class="text-sm font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3">About Me</h2>
                     <h3 class="text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight transition-colors duration-300">
-                        Aspiring Software Developer <br class="hidden lg:block"> & Engineer based in NYC
+                        {aboutHeadline}
                     </h3>
-                    
+
                     <div class="space-y-4 text-slate-600 dark:text-slate-300 leading-relaxed transition-colors duration-300">
-                        <p>
-                            I am eager to hone my skills and contribute to innovative projects that make a difference. 
-                            Born and raised in New York City, I developed a passion for technology that led me to 
-                            St. John's University, where I recently graduated with my <strong>Bachelor's degree in Computer Science</strong>.
-                        </p>
-                        <p>
-                            Outside of work and academics, I enjoy travelling, reading an interesting book, 
-                            or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York.
-                            I’m a big believer in staying active and using sports to keep my competitive edge sharp.
-                        </p>
-                        <p class="font-medium text-slate-900 dark:text-white transition-colors duration-300">
-                            Currently focusing on <span class="text-blue-600 dark:text-blue-400">Digirips</span> and <span class="text-blue-600 dark:text-blue-400">Dragon Bot 2.0</span>,
-                            projects that you can check out below. I’m always open to connecting, so feel free to reach out if you’d like to chat about potential opportunities or just want to say hi!
-                        </p>
+                        {aboutParagraphs.map((para) => (
+                            <p>{para}</p>
+                        ))}
                     </div>
 
                     <div class="grid grid-cols-2 gap-6 mt-10 border-t border-slate-100 dark:border-slate-800 pt-8 transition-colors duration-300">
                         <div>
                             <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">Core Languages</p>
                             <p class="text-xs text-balance uppercase tracking-wide text-slate-400 dark:text-slate-500 font-medium transition-colors duration-300">
-                            Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust
+                                {coreLanguages}
                             </p>
                         </div>
                         <div>
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">9+</p>
+                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">{projectsBuilt}</p>
                             <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold transition-colors duration-300">Projects Built</p>
                         </div>
                     </div>
