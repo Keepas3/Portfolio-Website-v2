@@ -5,20 +5,21 @@ import ExperienceItem from '../components/ExperienceItem.astro';
 import CourseCard from '../components/CourseCard.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import Contact from '../components/Contact.astro';
+import LiveProjectCard from '../components/LiveProjectCard.astro';
 
-import { getSiteSettings } from '../lib/sanity';
+import { getSiteSettings, getLiveProjects } from '../lib/sanity';
 import { Image } from 'astro:assets';
 import bryanSuit from '../assets/img/Bryan_Suit.jpg';
 import facingForward from '../assets/img/Facing_forward.jpg';
 
 const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
-const settings = await getSiteSettings();
+const [settings, liveProjects] = await Promise.all([getSiteSettings(), getLiveProjects()]);
 const resumeUrl = settings.resumeUrl ?? '/Bryan_Fung_Resume.pdf';
-const aboutHeadline = settings.aboutHeadline ?? 'Aspiring Software Developer & Engineer based in NYC';
+const aboutHeadline = settings.aboutHeadline ?? 'Software, AI & Systems Engineer based in NYC';
 const aboutParagraphs = settings.aboutParagraphs ?? [
-  'I am eager to hone my skills and contribute to innovative projects that make a difference. Born and raised in New York City, I developed a passion for technology that led me to St. John\'s University, where I recently graduated with my Bachelor\'s degree in Computer Science.',
+  'I am a motivated technologist eager to build, automate, and solve complex problems across software, AI, and systems domains. Born and raised in New York City, my passion for technology led me to St. John\'s University, where I graduated with a Bachelor\'s degree in Computer Science.',
   'Outside of work and academics, I enjoy travelling, reading an interesting book, or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York. I\'m a big believer in staying active and using sports to keep my competitive edge sharp.',
-  'Currently focusing on Digirips and Dragon Bot 2.0, projects that you can check out below. I\'m always open to connecting, so feel free to reach out if you\'d like to chat about potential opportunities or just want to say hi!',
+  'My work spans full-stack development, AI-powered tooling, cloud infrastructure, and automation — check out my projects below to see it in action. I\'m always open to connecting about software engineering, AI/ML, IT, or any opportunity to make an impact.',
 ];
 const coreLanguages = settings.coreLanguages ?? 'Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust';
 const projectsBuilt = settings.projectsBuilt ?? '9+';
@@ -286,13 +287,13 @@ const courses = [
 ];
 ---
 
-<MainLayout title="Bryan Fung | Software Engineer">
+<MainLayout title="Bryan Fung | Software & AI Engineer">
     <section class="min-h-screen flex flex-col md:flex-row items-center justify-center container mx-auto px-6 gap-12 transition-colors duration-300">
         <div class="reveal flex-1 text-center md:text-left">
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-slate-900 dark:text-white">
                 Welcome,<br>I'm <span class="text-blue-600">Bryan Fung</span>
             </h1>
-            <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg">Aspiring Software Developer & Engineer based in NYC. </p>
+            <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg">Aspiring Software, AI & Systems Engineer based in NYC.</p>
             <div class="mt-10 flex gap-4 justify-center md:justify-start">
                 <a 
                     href={resumeUrl}
@@ -458,6 +459,28 @@ const courses = [
             </div>
         </div>
     </section>
+
+    {liveProjects.length > 0 && (
+      <section id="live" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div class="container mx-auto px-6">
+          <h2 class="text-4xl font-bold mb-4 text-center text-slate-900 dark:text-white transition-colors duration-300">Live Deployments</h2>
+          <p class="text-center text-slate-500 dark:text-slate-400 mb-12 max-w-xl mx-auto text-sm">
+            Deployed sites and apps you can visit right now.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {liveProjects.map((project) => (
+              <LiveProjectCard
+                title={project.title}
+                description={project.description}
+                url={project.url}
+                imageUrl={project.imageUrl}
+                techStack={project.techStack}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
 
     <section id="projects" class="py-24 bg-slate-100 dark:bg-slate-800 transition-colors duration-300">
         <div class="container mx-auto px-6">

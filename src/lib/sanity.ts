@@ -57,3 +57,28 @@ export async function getResumeUrl(): Promise<string | null> {
   const settings = await getSiteSettings();
   return settings.resumeUrl;
 }
+
+export interface LiveProject {
+  title: string;
+  description: string;
+  url: string;
+  imageUrl: string | null;
+  techStack: string[];
+}
+
+export async function getLiveProjects(): Promise<LiveProject[]> {
+  try {
+    const results = await sanity.fetch<LiveProject[]>(
+      `*[_type == "liveProject"] | order(order asc) {
+        title,
+        description,
+        url,
+        "imageUrl": image.asset->url,
+        techStack
+      }`
+    );
+    return results ?? [];
+  } catch {
+    return [];
+  }
+}

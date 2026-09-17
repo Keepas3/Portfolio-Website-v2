@@ -1,4 +1,5 @@
 import {defineType, defineField} from 'sanity'
+import {liveProject} from './liveProject'
 
 const siteSettings = defineType({
   name: 'siteSettings',
@@ -40,4 +41,4 @@ const siteSettings = defineType({
   ],
 })
 
-export const schemaTypes = [siteSettings]
+export const schemaTypes = [siteSettings, liveProject]
