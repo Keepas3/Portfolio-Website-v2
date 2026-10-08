@@ -1,5 +1,6 @@
 import {defineType, defineField} from 'sanity'
 import {liveProject} from './liveProject'
+import certification from './certification'
 
 const siteSettings = defineType({
   name: 'siteSettings',
@@ -12,6 +13,12 @@ const siteSettings = defineType({
       type: 'file',
       options: {accept: '.pdf'},
       description: 'Upload your latest resume PDF here. The portfolio will serve this file automatically.',
+    }),
+    defineField({
+      name: 'resumeLabel',
+      title: 'Resume Label (internal only)',
+      type: 'string',
+      description: 'Reminder for yourself — e.g. "SWE Resume", "AI/ML Resume", "IT Support Resume". Not shown on the site.',
     }),
     defineField({
       name: 'aboutHeadline',
@@ -41,4 +48,4 @@ const siteSettings = defineType({
   ],
 })
 
-export const schemaTypes = [siteSettings, liveProject]
+export const schemaTypes = [siteSettings, liveProject, certification]

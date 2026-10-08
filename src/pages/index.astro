@@ -6,14 +6,15 @@ import CourseCard from '../components/CourseCard.astro';
 import ProjectModal from '../components/ProjectModal.astro';
 import Contact from '../components/Contact.astro';
 import LiveProjectCard from '../components/LiveProjectCard.astro';
+import CertificationCard from '../components/CertificationCard.astro';
 
-import { getSiteSettings, getLiveProjects } from '../lib/sanity';
+import { getSiteSettings, getLiveProjects, getCertifications } from '../lib/sanity';
 import { Image } from 'astro:assets';
 import bryanSuit from '../assets/img/Bryan_Suit.jpg';
 import facingForward from '../assets/img/Facing_forward.jpg';
 
 const allImages = import.meta.glob('../assets/img/*.{png,jpg,jpeg,webp}');
-const [settings, liveProjects] = await Promise.all([getSiteSettings(), getLiveProjects()]);
+const [settings, liveProjects, certifications] = await Promise.all([getSiteSettings(), getLiveProjects(), getCertifications()]);
 const resumeUrl = settings.resumeUrl ?? '/Bryan_Fung_Resume.pdf';
 const aboutHeadline = settings.aboutHeadline ?? 'Software, AI & Systems Engineer based in NYC';
 const aboutParagraphs = settings.aboutParagraphs ?? [
@@ -26,12 +27,35 @@ const projectsBuilt = settings.projectsBuilt ?? '9+';
 
 const myProjects = [
     {
-        id: "campus-hub", 
+        id: "nova-cloud",
+        title: "Nova Cloud Assistant",
+        description: `Autonomous AI personal assistant built on AWS Bedrock, running on a Python + CustomTkinter desktop GUI.
+                      Architected an S3-backed context pipeline to maintain persistent chat memory across sessions, and engineered a CRUD command engine to reduce API token consumption and cut response latency.`,
+        fullDescription: `
+            <div class="space-y-4">
+                <p><strong>Nova Cloud Assistant</strong> is a personal AI proxy designed to offload and automate daily responsibilities through a conversational desktop interface.</p>
+                <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Architecture Highlights</h4>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li><strong>LLM Backend:</strong> Powered by <strong>AWS Bedrock</strong> for managed model inference with no local GPU requirements.</li>
+                    <li><strong>Persistent Memory:</strong> S3-backed context pipeline using <strong>Boto3</strong> to maintain full conversation history across sessions.</li>
+                    <li><strong>Command Engine:</strong> CRUD-based operation router that minimizes redundant API calls, reducing token consumption and response latency.</li>
+                    <li><strong>Desktop GUI:</strong> Built with <strong>CustomTkinter</strong> for a clean, native Python desktop experience.</li>
+                </ul>
+                <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
+                    <p class="text-blue-700 text-xs font-medium">Ongoing personal project — June 2026 to present</p>
+                </div>
+            </div>
+        `,
+        link: "https://github.com/Keepas3",
+        techStack: "Python | AWS Bedrock | CustomTkinter | Boto3 | S3"
+    },
+    {
+        id: "campus-hub",
         title: "SJU Campus Hub",
         video: "/videos/SJU_Campus_Hub.mp4",
         images: "/gallery/Hacks2025.png | /gallery/SJU_Campus_Hub_Group.png",
-        description:  `Winner of the St. John's Track for St. John's Hacks 2025. A centralized platform designed to connect all events of St. John's University in one place.
-                        Provides information about campus activities, club events, and study groups.`,
+        description:  `1st Place winner at St. John's Hacks 2025. As Lead Engineer on a team of 3, I architected and deployed a centralized event platform for the SJU campus community.
+                        Overcame a build-environment bottleneck mid-hackathon by owning the Git integration pipeline — shipping a fully deployed Vercel app in under 24 hours.`,
         fullDescription: `
             <div class="space-y-4">
                 <p><strong>SJU Campus Hub</strong> is a centralized ecosystem designed to connect the St. John's community. We built this to solve the fragmentation of campus information, creating a hub for student life.</p>    
@@ -56,8 +80,8 @@ const myProjects = [
         title: "AdaptIQ",
         video: "/videos/AdaptIQ-0.mp4",
         images: "/gallery/StJohnsHacks2026.jpg | /gallery/presentation.PNG |/gallery/ToltIQ.jpg",
-        description: `3rd Place Winner of St. John's University Hacks 2026. AdaptIQ is a PowerPoint Add-on that uses LLMs and web APIs to analyze slide content in real-time, generate relevant images with DALL-E, and provide automated research assistance.
-                      Features real-time slide analysis, DALL-E image generation, and multi-format summary exports.`,
+        description: `3rd Place winner, ToltIQ Track — St. John's Hacks 2026. Cross-platform PowerPoint add-in built with a team of 3 in Next.js 15 + TypeScript.
+                      Integrated GPT-4 for real-time slide analysis, DALL-E for automated image generation, and Tavily API to pull verified citations — streamed as structured JSON and rendered live inside the Office canvas.`,
         fullDescription: `
         <div class="space-y-4">
             <p><strong>AdaptIQ</strong> is an intelligent PowerPoint Add-on that bridges the gap between slide design and active research. Built to streamline the workflow for professionals, it acts as a real-time sidekick during the content creation process.</p>
@@ -80,7 +104,7 @@ const myProjects = [
         id: "freelance-web-development", 
         title: "Freelance Web Development",
         video: "/videos/seasaide.mp4", 
-        description: "A collection of custom websites I built for clients, businesses, and personal brands using modern web technologies. Each project being tailored to their specific needs and goals. Learn more about the projects below.",
+        description: "2 live client sites built with Astro, Next.js, and Sanity.io CMS. Seasaide features a real-time Spotify API integration; Sound Archives includes a frequency-synchronized audio visualizer built on the Web Audio API. Clients update all content independently with zero code changes.",
         fullDescription: `
             <div class="space-y-4">
                 <p class="text-sm text-slate-600">A showcase of custom websites I have built. Select a project below, then use the tabs at the top of the video player to toggle between the live site and its CMS dashboard.</p>
@@ -163,12 +187,56 @@ const myProjects = [
         techStack: "Next.js | Sanity.io | Astro | Tailwind CSS"
     },
     {
+        id: "tempo-cpp",
+        title: "Tempo C++",
+        description: `Chess evaluation engine built in C++ using bitboard state representations for high-performance bitwise move generation.
+                      Implements minimax search with alpha-beta pruning and piece-square tables — a direct application of competitive chess knowledge to low-level systems engineering.`,
+        fullDescription: `
+            <div class="space-y-4">
+                <p><strong>Tempo C++</strong> is a chess engine that applies low-level systems programming to the game I've competed in for years.</p>
+                <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Core Engineering</h4>
+                <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                    <li><strong>Bitboard Representation:</strong> Encodes the full board state as 64-bit integers, enabling fast bitwise operations for move generation and attack detection.</li>
+                    <li><strong>Minimax + Alpha-Beta Pruning:</strong> Adversarial search tree that prunes unpromising branches early, dramatically reducing nodes evaluated per move.</li>
+                    <li><strong>Piece-Square Tables:</strong> Position-weighted evaluation heuristics that guide the engine toward strategically sound play beyond raw material count.</li>
+                </ul>
+                <div class="bg-slate-100 border-l-4 border-slate-900 p-3 rounded-r-lg">
+                    <p class="text-slate-700 text-xs font-bold uppercase tracking-tighter">Personal project — applying competitive chess knowledge to systems engineering</p>
+                </div>
+            </div>
+        `,
+        link: "https://github.com/Keepas3",
+        techStack: "C++ | Bitboards | Minimax | Alpha-Beta Pruning"
+    },
+    {
+        id: "video-recap",
+        title: "Video Recap",
+        video: "/videos/video_recap.mp4",
+        description: `Built in under 24 hours with a team of 4 at SJU ACM x HeadStarter Hackathon 2024. Integrates OpenRouter AI and Hugging Face Transformers to summarize YouTube video transcripts.
+                      Diagnosed and resolved a critical API timeout mid-hackathon by rewriting the transcript chunking pipeline — shipped a working demo on deadline.`,
+        fullDescription: `
+        <div class="space-y-4">
+            <p><strong>Video Recap</strong> was born from a simple problem: the information density of YouTube is too high for quick consumption. This tool uses AI to transform long-form video transcripts into digestible, high-level summaries.</p>
+            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">The Stack</h4>
+            <ul class="list-disc pl-5 space-y-2 text-slate-600">
+                <li><strong>AI Orchestration:</strong> Utilized <strong>OpenRouter AI</strong> to access the best-performing LLMs for text summarization.</li>
+                <li><strong>Natural Language Processing:</strong> Integrated <strong>Hugging Face Transformers</strong> to refine the transcript analysis process.</li>
+                <li><strong>Data Retrieval:</strong> Automated the extraction of YouTube transcripts to ensure 100% accuracy in source data.</li>
+            </ul>
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
+                <p class="text-blue-700 text-xs font-medium">Built during the SJU ACM x HeadStarter Hackathon 2024 — Team of 4.</p>
+            </div>
+        </div>
+    `,
+        link: "https://github.com/Keepas3/VideoRecap-HeadStarterHackathon",
+        techStack: "Python | OpenRouterAI | HTML/CSS | Hugging Face Transformer"
+    },
+    {
         id: "dragon-bot-v2",
         title: "Dragon Bot 2.0",
         videoBot: "/videos/Bot_Demo.mp4",
         videoWeb: "/videos/Video_Demo.mp4",
-        description: `A Discord Bot providing real-time clan tracking, smart war & raid reminders with automatic notifications.
-                      Includes a direct feed to the latest leaks and news from Reddit.`,
+        description: `Live Discord bot deployed 24/7 on Railway with a Python backend and companion website. Monitors clan performance in real time via the Clash of Clans API, fires automated war & raid reminders, and pipes the latest community leaks directly from Reddit API — all without manual intervention.`,
         fullDescription: `
         <div class="space-y-4">
             <p><strong>Dragon Bot 2.0</strong> is a Discord Bot designed for clan management and tracking. Where to get started? Check out the Website! </p>
@@ -187,12 +255,11 @@ const myProjects = [
         techStack: "Python | Discord API | Railway | Reddit API | Astro | Tailwind CSS"
     },
     {
-        id: "vcrts", 
+        id: "vcrts",
         title: "VCRTS",
         video: "/videos/VCRTS.mp4",
-        description: `A distributed cloud computing system that leverages parked vehicles' computational resources. 
-                      Features real-time job and vehicle scheduling, resource allocation, and a GUI for both clients and admins. 
-                      Built by a team of 5 developers as a capstone project.`,
+        description: `CS capstone built with a team of 5. A distributed computing platform that allocates idle vehicle CPU resources for live job execution.
+                      Engineered dual Java Swing GUIs (admin + client view), a priority-queue job scheduler, and a MySQL backend ensuring zero data loss across node handoffs.`,
         fullDescription: `
         <div class="space-y-4">
             <p><strong>VCRTS (Vehicular Cloud Resource Tracking System)</strong> is a distributed computing platform designed to harness the idle processing power of parked vehicles. In short, this capstone project focused on resource optimization.</p>
@@ -209,29 +276,6 @@ const myProjects = [
     `,
         link: "https://github.com/Alegacki21/VCRTS-SWE-Project",
         techStack: "Java | Java Swing | MYSQL"
-    },
-    {
-        id: "video-recap", 
-        title: "Video Recap",
-        video: "/videos/video_recap.mp4",
-        description: `Designed to condense YouTube videos into short, concise sentences for quick understanding of lengthy content. Utilizes OpenRouter AI and YouTube transcripts to generate summaries.
-                      Developed during the SJU ACM x HeadStarter Hackathon 2024 in a team of 4 developers.`,
-        fullDescription: `
-        <div class="space-y-4">
-            <p><strong>Video Recap</strong> was born from a simple problem: the information density of YouTube is too high for quick consumption. This tool uses AI to transform long-form video transcripts into digestible, high-level summaries.</p>
-            <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">The Stack</h4>
-            <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                <li><strong>AI Orchestration:</strong> Utilized <strong>OpenRouter AI</strong> to access the best-performing LLMs for text summarization.</li>
-                <li><strong>Natural Language Processing:</strong> Integrated <strong>Hugging Face Transformers</strong> to refine the transcript analysis process.</li>
-                <li><strong>Data Retrieval:</strong> Automated the extraction of YouTube transcripts to ensure 100% accuracy in source data.</li>
-            </ul>
-            <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
-                <p class="text-blue-700 text-xs font-medium">Built during the SJU ACM x HeadStarter Hackathon 2024 — Team of 4.</p>
-            </div>
-        </div>
-    `,
-        link: "https://github.com/Keepas3/VideoRecap-HeadStarterHackathon",
-        techStack: "Python | OpenRouterAI | HTML/CSS | Hugging Face Transformer"
     }
 ];
 
@@ -293,16 +337,25 @@ const courses = [
             <h1 class="text-5xl md:text-7xl font-extrabold leading-tight text-slate-900 dark:text-white">
                 Welcome,<br>I'm <span class="text-blue-600">Bryan Fung</span>
             </h1>
-            <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg">Aspiring Software, AI & Systems Engineer based in NYC.</p>
+            <p class="text-xl text-slate-600 dark:text-slate-300 mt-6 max-w-lg min-h-[1.75rem]">
+                <span id="hero-typing"></span><span id="hero-cursor" class="inline-block w-[2px] h-5 bg-slate-500 dark:bg-slate-400 ml-px align-middle" style="animation: blink 1s step-end infinite;"></span>
+            </p>
             <div class="mt-10 flex gap-4 justify-center md:justify-start">
-                <a 
+                <a
                     href={resumeUrl}
-                    target="_blank" 
+                    target="_blank"
                     rel="noopener noreferrer"
                     class="inline-flex items-center gap-2 px-8 py-3 bg-slate-900 dark:bg-white text-white dark:text-slate-900 rounded-full font-bold hover:bg-blue-600 dark:hover:bg-blue-50 transition-all active:scale-95 group"
                 >
                     <span>View Resume</span>
                     <i class='bx bx-link-external text-lg group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform'></i>
+                </a>
+                <a
+                    href="#contact"
+                    class="inline-flex items-center gap-2 px-8 py-3 border-2 border-slate-900 dark:border-white text-slate-900 dark:text-white rounded-full font-bold hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-slate-900 transition-all active:scale-95 group"
+                >
+                    <span>Let's Connect</span>
+                    <i class='bx bx-right-arrow-alt text-lg group-hover:translate-x-1 transition-transform'></i>
                 </a>
                 <div class="flex items-center gap-4 text-3xl">
                     <a href="https://github.com/Keepas3" class="text-slate-900 dark:text-white hover:text-blue-600 dark:hover:text-blue-400 transition-colors" target ="_blank" rel="noopener noreferrer">
@@ -349,16 +402,24 @@ const courses = [
                         ))}
                     </div>
 
-                    <div class="grid grid-cols-2 gap-6 mt-10 border-t border-slate-100 dark:border-slate-800 pt-8 transition-colors duration-300">
-                        <div>
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">Core Languages</p>
-                            <p class="text-xs text-balance uppercase tracking-wide text-slate-400 dark:text-slate-500 font-medium transition-colors duration-300">
-                                {coreLanguages}
+                    <div class="grid grid-cols-3 gap-6 mt-10 border-t border-slate-100 dark:border-slate-800 pt-8 transition-colors duration-300">
+                        <div class="text-center sm:text-left">
+                            <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
+                                <span class="stat-counter" data-count-to="9" data-count-suffix="+">0</span>
                             </p>
+                            <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Projects Built</p>
                         </div>
-                        <div>
-                            <p class="text-2xl font-bold text-slate-900 dark:text-white transition-colors duration-300">{projectsBuilt}</p>
-                            <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold transition-colors duration-300">Projects Built</p>
+                        <div class="text-center sm:text-left">
+                            <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
+                                <span class="stat-counter" data-count-to="8" data-count-suffix="+">0</span>
+                            </p>
+                            <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Languages</p>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
+                                <span class="stat-counter" data-count-to="16" data-count-suffix="+">0</span>
+                            </p>
+                            <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Tech Tools</p>
                         </div>
                     </div>
                 </div>
@@ -409,6 +470,18 @@ const courses = [
                         <div data-context="Engineered asynchronous web services and web application backends using Node.js." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
                             <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
                         </div>
+                        <div data-context="Built AI-powered features in AdaptIQ and Video Recap using the OpenAI API for text generation and DALL-E image synthesis." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/openai.png" alt="OpenAI" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Used Hugging Face Transformers for NLP-based transcript processing and summarization in Video Recap." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/huggingface.png" alt="Hugging Face" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Comfortable working in Linux environments for scripting, server management, and development workflows." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/linux.png" alt="Linux" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Use Git for version control across all projects — branching, merging, and collaborative development via GitHub." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/git.png" alt="Git" class="w-14 h-14 object-contain" />
+                        </div>
                     </div>
 
                     <div class="flex gap-6 items-center">
@@ -448,6 +521,18 @@ const courses = [
                         <div data-context="Engineered asynchronous web services and web application backends using Node.js." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
                             <img src="/toolkit/nodejs.png" alt="Node.js" class="w-14 h-14 object-contain" />
                         </div>
+                        <div data-context="Built AI-powered features in AdaptIQ and Video Recap using the OpenAI API for text generation and DALL-E image synthesis." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/openai.png" alt="OpenAI" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Used Hugging Face Transformers for NLP-based transcript processing and summarization in Video Recap." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/huggingface.png" alt="Hugging Face" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Comfortable working in Linux environments for scripting, server management, and development workflows." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/linux.png" alt="Linux" class="w-14 h-14 object-contain" />
+                        </div>
+                        <div data-context="Use Git for version control across all projects — branching, merging, and collaborative development via GitHub." class="hover-icon flex items-center justify-center w-20 h-20 bg-white dark:bg-slate-800 rounded-full shadow-sm border border-slate-200 dark:border-slate-700 hover:shadow-md hover:-translate-y-1 transform transition-all duration-200 cursor-pointer">
+                            <img src="/toolkit/git.png" alt="Git" class="w-14 h-14 object-contain" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -486,18 +571,56 @@ const courses = [
         <div class="container mx-auto px-6">
             <h2 class="text-4xl font-bold mb-12 text-center text-slate-900 dark:text-white transition-colors duration-300">Featured Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 whitespace-pre-line">
-                {myProjects.map((project) => (
+                {myProjects.slice(0, 6).map((project) => (
                     <ProjectCard {...project} />
                 ))}
             </div>
+
+            <div id="extra-projects" class="hidden grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 whitespace-pre-line mt-8">
+                {myProjects.slice(6).map((project) => (
+                    <ProjectCard {...project} />
+                ))}
+            </div>
+
+            <div class="mt-10 text-center">
+                <button id="toggle-projects" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all group">
+                    <span id="toggle-text">Show 2 more projects</span>
+                    <i id="toggle-icon" class='bx bx-chevron-down text-lg group-hover:translate-y-0.5 transition-transform'></i>
+                </button>
+            </div>
         </div>
-        <div class="mt-16 text-center">
+        <div class="mt-8 text-center">
             <a href="https://github.com/Keepas3?tab=repositories" target="_blank"rel="noopener noreferrer" class="inline-flex items-center gap-2 px-8 py-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-800 transition-all group">
                 <span>View More on GitHub</span>
                 <i class='bx bxl-github text-xl group-hover:rotate-12 transition-transform'></i>
             </a>
         </div>
     </section>
+
+    {certifications.length > 0 && (
+      <section id="certifications" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
+        <div class="container mx-auto px-6 max-w-6xl">
+          <h2 class="text-sm font-black uppercase tracking-widest text-blue-600 dark:text-blue-400 mb-3 text-center">Credentials</h2>
+          <h3 class="text-4xl font-bold mb-4 text-center text-slate-900 dark:text-white transition-colors duration-300">Certifications</h3>
+          <p class="text-center text-slate-500 dark:text-slate-400 mb-12 max-w-xl mx-auto text-sm">
+            Verified credentials and professional certifications.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {certifications.map((cert) => (
+              <CertificationCard
+                name={cert.name}
+                issuer={cert.issuer}
+                status={cert.status}
+                dateEarned={cert.dateEarned}
+                expiryDate={cert.expiryDate}
+                credentialUrl={cert.credentialUrl}
+                badgeImageUrl={cert.badgeImageUrl}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+    )}
 
     <section id="experience" class="py-24 bg-white dark:bg-slate-900 transition-colors duration-300">
         <div class="container mx-auto px-6 max-w-4xl">
@@ -704,15 +827,25 @@ document.addEventListener("DOMContentLoaded", () => {
             let customTabsContainer = document.getElementById('injected-custom-tabs');
             if (customTabsContainer) customTabsContainer.innerHTML = '';
 
+            const noVideoPlaceholder = document.getElementById('no-video-placeholder');
+
             if (title === "Freelance Web Development") {
                 renderTopTabs('seasaide');
+                if (noVideoPlaceholder) noVideoPlaceholder.classList.add('hidden');
+                if (modalVideo) modalVideo.classList.remove('hidden');
             } else {
                 if (ecosystemTabs) {
                     ecosystemTabs.style.display = (videoBot && videoWeb) ? 'flex' : 'none';
                 }
-                if (modalVideoSource && modalVideo) {
-                    modalVideoSource.src = defaultVideo;
-                    modalVideo.load();
+                if (defaultVideo) {
+                    if (modalVideoSource) modalVideoSource.src = defaultVideo;
+                    if (modalVideo) { modalVideo.classList.remove('hidden'); modalVideo.load(); }
+                    if (noVideoPlaceholder) noVideoPlaceholder.classList.add('hidden');
+                    if (showVideoBtn) showVideoBtn.style.display = '';
+                } else {
+                    if (modalVideo) modalVideo.classList.add('hidden');
+                    if (noVideoPlaceholder) noVideoPlaceholder.classList.remove('hidden');
+                    if (showVideoBtn) showVideoBtn.style.display = 'none';
                 }
             }
 
@@ -799,9 +932,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
     closeButtons.forEach(btn => btn.addEventListener('click', closeModal));
     if (modal) {
-        modal.addEventListener('click', (e) => { 
-            if (e.target === modal) closeModal(); 
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
         });
+    }
+
+    /* =========================================
+       4. SHOW MORE / SHOW LESS PROJECTS TOGGLE
+       ========================================= */
+    const toggleBtn = document.getElementById('toggle-projects');
+    const extraProjects = document.getElementById('extra-projects');
+    const toggleText = document.getElementById('toggle-text');
+    const toggleIcon = document.getElementById('toggle-icon');
+
+    toggleBtn?.addEventListener('click', () => {
+        const isHidden = extraProjects?.classList.contains('hidden');
+        if (isHidden) {
+            extraProjects?.classList.remove('hidden');
+            if (toggleText) toggleText.textContent = 'Show less';
+            if (toggleIcon) toggleIcon.className = 'bx bx-chevron-up text-lg group-hover:-translate-y-0.5 transition-transform';
+        } else {
+            extraProjects?.classList.add('hidden');
+            if (toggleText) toggleText.textContent = 'Show 2 more projects';
+            if (toggleIcon) toggleIcon.className = 'bx bx-chevron-down text-lg group-hover:translate-y-0.5 transition-transform';
+        }
+    });
+
+    /* =========================================
+       5. ANIMATED STAT COUNTERS
+       ========================================= */
+    const statCounters = document.querySelectorAll('.stat-counter');
+    if (statCounters.length > 0) {
+        const statsObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting || entry.target.classList.contains('counted')) return;
+                entry.target.classList.add('counted');
+                const target = parseFloat(entry.target.dataset.countTo || '0');
+                const suffix = entry.target.dataset.countSuffix || '';
+                const decimals = parseInt(entry.target.dataset.countDecimals || '0');
+                const duration = 1600;
+                const startTime = performance.now();
+                const tick = (now: number) => {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const eased = 1 - Math.pow(1 - progress, 3);
+                    entry.target.textContent = (target * eased).toFixed(decimals) + (progress >= 1 ? suffix : '');
+                    if (progress < 1) requestAnimationFrame(tick);
+                };
+                requestAnimationFrame(tick);
+            });
+        }, { threshold: 0.6 });
+        statCounters.forEach(el => statsObserver.observe(el));
+    }
+
+    /* =========================================
+       6. HERO TYPING ANIMATION
+       ========================================= */
+    const heroTyping = document.getElementById('hero-typing') as HTMLSpanElement | null;
+    const heroCursor = document.getElementById('hero-cursor');
+    if (heroTyping) {
+        const text = 'Aspiring Software, AI & Systems Engineer based in NYC.';
+        let i = 0;
+        const type = () => {
+            if (i < text.length) {
+                heroTyping.textContent += text[i++];
+                setTimeout(type, 38);
+            } else if (heroCursor) {
+                setTimeout(() => {
+                    heroCursor.style.animation = 'none';
+                    heroCursor.style.opacity = '0';
+                }, 1800);
+            }
+        };
+        setTimeout(type, 600);
     }
 });
 </script>

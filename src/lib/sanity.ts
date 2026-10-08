@@ -66,6 +66,30 @@ export interface LiveProject {
   techStack: string[];
 }
 
+export interface Certification {
+  name: string;
+  issuer: string;
+  status: 'Earned' | 'In Progress';
+  dateEarned: string | null;
+  expiryDate: string | null;
+  credentialUrl: string | null;
+  badgeImageUrl: string | null;
+}
+
+export async function getCertifications(): Promise<Certification[]> {
+  try {
+    const results = await sanity.fetch<Certification[]>(
+      `*[_type == "certification"] | order(order asc) {
+        name, issuer, status, dateEarned, expiryDate, credentialUrl,
+        "badgeImageUrl": badgeImage.asset->url
+      }`
+    );
+    return results ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getLiveProjects(): Promise<LiveProject[]> {
   try {
     const results = await sanity.fetch<LiveProject[]>(

@@ -90,4 +90,48 @@ const navLinks = [
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
     });
+
+    // 5. Active section highlighting
+    const sectionNavMap: Record<string, string> = {
+        'about': '/about',
+        'Skills': '/about',
+        'live': '/projects',
+        'certifications': '/projects',
+        'projects': '/projects',
+        'experience': '/experience',
+        'education': '/education',
+        'contact': '/contact',
+    };
+
+    const setActiveLink = (href: string) => {
+        document.querySelectorAll('.nav-link').forEach(link => {
+            if (link.getAttribute('href') === href) {
+                link.classList.add('nav-active');
+            } else {
+                link.classList.remove('nav-active');
+            }
+        });
+    };
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const mapped = sectionNavMap[entry.target.id];
+                if (mapped) setActiveLink(mapped);
+            }
+        });
+    }, { rootMargin: '0px 0px -75% 0px', threshold: 0 });
+
+    document.querySelectorAll('section[id]').forEach(section => {
+        sectionObserver.observe(section);
+    });
 </script>
+
+<style>
+    .nav-link.nav-active {
+        color: #2563eb;
+    }
+    :global(html.dark) .nav-link.nav-active {
+        color: #60a5fa;
+    }
+</style>
