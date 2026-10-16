@@ -29,25 +29,27 @@ const myProjects = [
     {
         id: "nova-cloud",
         title: "Nova Cloud Assistant",
-        description: `Autonomous AI personal assistant built on AWS Bedrock, running on a Python + CustomTkinter desktop GUI.
-                      Architected an S3-backed context pipeline to maintain persistent chat memory across sessions, and engineered a CRUD command engine to reduce API token consumption and cut response latency.`,
+        video: "/videos/Nova.mp4",
+        description: `Personal AI assistant delivered as a Discord bot. Built on AWS Bedrock with an S3-backed context pipeline: upload a resume or notes and it answers from your own files, tracks tasks, and generates daily briefings.
+                      `,
         fullDescription: `
             <div class="space-y-4">
-                <p><strong>Nova Cloud Assistant</strong> is a personal AI proxy designed to offload and automate daily responsibilities through a conversational desktop interface.</p>
+                <p><strong>Nova Cloud Assistant</strong> is a personal AI assistant that lives in Discord. The assistant I wanted, so I built it, built to handle the small stuff, so I can focus on what matters.</p>
                 <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Architecture Highlights</h4>
                 <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                    <li><strong>LLM Backend:</strong> Powered by <strong>AWS Bedrock</strong> for managed model inference with no local GPU requirements.</li>
-                    <li><strong>Persistent Memory:</strong> S3-backed context pipeline using <strong>Boto3</strong> to maintain full conversation history across sessions.</li>
-                    <li><strong>Command Engine:</strong> CRUD-based operation router that minimizes redundant API calls, reducing token consumption and response latency.</li>
-                    <li><strong>Desktop GUI:</strong> Built with <strong>CustomTkinter</strong> for a clean, native Python desktop experience.</li>
+                    <li><strong>Discord Bot:</strong> Built with <strong>discord.py</strong> and hosted 24/7 on <strong>Railway</strong>, with slash commands, DMs, and @mentions.</li>
+                    <li><strong>LLM Backend:</strong> <strong>AWS Bedrock</strong> for managed model inference with no local GPU requirements.</li>
+                    <li><strong>Persistent Context:</strong> Per-user isolated <strong>S3</strong> storage via <strong>Boto3</strong>. Uploaded PDF, DOCX, and text files are parsed and saved.</li>
+                    <li><strong>Command Engine:</strong> Task and note commands run without a model call, reducing token consumption and response latency.</li>
+                    <li><strong>Health Tracking:</strong> Plain-text <strong>/log</strong> entries are validated before saving, and <strong>/health</strong> reviews weekly trends.</li>
                 </ul>
                 <div class="bg-blue-50 border-l-4 border-blue-600 p-3 rounded-r-lg">
-                    <p class="text-blue-700 text-xs font-medium">Ongoing personal project — June 2026 to present</p>
+                    <p class="text-blue-700 text-xs font-medium">Built on discord so it's available on all devices with no extra installation.</p>
                 </div>
             </div>
         `,
-        link: "https://github.com/Keepas3",
-        techStack: "Python | AWS Bedrock | CustomTkinter | Boto3 | S3"
+        link: "https://github.com/Keepas3/Nova-Cloud-Assistant",
+        techStack: "Python | AWS Bedrock | S3 | Boto3 | Railway | CustomTkinter"
     },
     {
         id: "campus-hub",
@@ -187,26 +189,27 @@ const myProjects = [
         techStack: "Next.js | Sanity.io | Astro | Tailwind CSS"
     },
     {
-        id: "tempo-cpp",
+       id: "tempo-cpp",
         title: "Tempo C++",
-        description: `Chess evaluation engine built in C++ using bitboard state representations for high-performance bitwise move generation.
-                      Implements minimax search with alpha-beta pruning and piece-square tables — a direct application of competitive chess knowledge to low-level systems engineering.`,
+        video: "/videos/TempoC_small.mp4",
+        description: `A desktop app that pulls games from chess sites into a local database, then allows for searching, ask AI assistant about potential improvement/weaknesses and replay with Stockfish analysis. The core is written in C++ with a Python and Qt interface on top.`,
         fullDescription: `
             <div class="space-y-4">
-                <p><strong>Tempo C++</strong> is a chess engine that applies low-level systems programming to the game I've competed in for years.</p>
-                <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">Core Engineering</h4>
+                <p><strong>Tempo C++</strong> is a personal chess archive for game analysis. It downloads directly from chess.com and lichess.</p>
+                <h4 class="font-bold text-slate-900 border-b pb-1 uppercase text-xs tracking-wider">What It Does</h4>
                 <ul class="list-disc pl-5 space-y-2 text-slate-600">
-                    <li><strong>Bitboard Representation:</strong> Encodes the full board state as 64-bit integers, enabling fast bitwise operations for move generation and attack detection.</li>
-                    <li><strong>Minimax + Alpha-Beta Pruning:</strong> Adversarial search tree that prunes unpromising branches early, dramatically reducing nodes evaluated per move.</li>
-                    <li><strong>Piece-Square Tables:</strong> Position-weighted evaluation heuristics that guide the engine toward strategically sound play beyond raw material count.</li>
+                    <li><strong>Stockfish Review:</strong> Marks every blunder, gives a score, and shows a live evaluation bar with best-moves. Runs several engines at once, about 5x faster than a single engine.</li>
+                    <li><strong>Stats and Openings:</strong> Win rate by color and opening, rating history, and an opening explorer that shows what you have played in each position and how it scored.</li>
+                    <li><strong>Opponent Scouting:</strong> Load another player's games and get their most common lines, best and worst openings, and my record against them. Tested on an archive of 140,000+ games.</li>
+                    <li><strong>AI Assistant:</strong> I can ask "what are my weaknesses as white?" in the chat. Claude looks up the relevant games to answer, includes a Fast, Balanced or Detailed setting trading speed for depth and cost.</li>
                 </ul>
                 <div class="bg-slate-100 border-l-4 border-slate-900 p-3 rounded-r-lg">
-                    <p class="text-slate-700 text-xs font-bold uppercase tracking-tighter">Personal project — applying competitive chess knowledge to systems engineering</p>
+                    <p class="text-slate-700 text-xs font-bold tracking-tighter">Personal project, built and used for any chess account</p>
                 </div>
             </div>
         `,
-        link: "https://github.com/Keepas3",
-        techStack: "C++ | Bitboards | Minimax | Alpha-Beta Pruning"
+        link: "https://github.com/Keepas3/Tempo-C-",
+        techStack: "C++ | Python | PySide6 (Qt) | SQLite | Stockfish | Claude API"
     },
     {
         id: "video-recap",
