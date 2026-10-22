@@ -874,12 +874,13 @@ const courses = [
                 <div id="archive-timeline">
                     {archiveByYear.map(({ year, items }) => (
                         <div class="archive-year-group">
-                            <!-- Year header -->
-                            <div class="archive-year-header sticky top-0 z-10 px-8 py-2 bg-slate-50 dark:bg-slate-800/80 backdrop-blur-sm border-y border-slate-100 dark:border-slate-800">
+                            <!-- Year header (clickable to collapse) -->
+                            <button class="archive-year-header w-full sticky top-0 z-10 px-8 py-2 bg-slate-50 dark:bg-slate-800/80 backdrop-blur-sm border-y border-slate-100 dark:border-slate-800 flex items-center justify-between hover:bg-slate-100 dark:hover:bg-slate-700/60 transition-colors cursor-pointer">
                                 <span class="text-[11px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{year}</span>
-                            </div>
+                                <i class='bx bx-chevron-down text-slate-400 dark:text-slate-500 text-base transition-transform duration-200'></i>
+                            </button>
                             <!-- Rows -->
-                            <div class="divide-y divide-slate-100 dark:divide-slate-800/60">
+                            <div class="archive-year-content divide-y divide-slate-100 dark:divide-slate-800/60">
                                 {items.map((project) => (
                                     <div class="archive-item group flex gap-4 px-8 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors" data-onsite={project.onSite ? "true" : "false"}>
                                         <!-- Month -->
@@ -1228,6 +1229,19 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     document.getElementById('close-archive')?.addEventListener('click', () => archiveModal?.close());
     archiveModal?.addEventListener('click', (e) => { if (e.target === archiveModal) archiveModal.close(); });
+    // Year group collapse toggle
+    document.querySelectorAll('.archive-year-header').forEach(btn => {
+        btn.addEventListener('click', () => {
+            const group = btn.closest('.archive-year-group');
+            const content = group?.querySelector('.archive-year-content') as HTMLElement | null;
+            const chevron = btn.querySelector('i') as HTMLElement | null;
+            if (!content) return;
+            const isCollapsed = content.style.display === 'none';
+            content.style.display = isCollapsed ? '' : 'none';
+            if (chevron) chevron.style.transform = isCollapsed ? '' : 'rotate(-90deg)';
+        });
+    });
+
     archiveScroll?.addEventListener('keydown', (e) => {
         const step = 80;
         if (e.key === 'ArrowDown') { e.preventDefault(); archiveScroll!.scrollTop += step; }
