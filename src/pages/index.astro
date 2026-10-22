@@ -471,7 +471,23 @@ const archiveProjectsFallback = [
 ];
 
 // Use Sanity data when available, fall back to hardcoded array while Studio is empty
-const archiveProjects = sanityArchive.length > 0 ? sanityArchive : archiveProjectsFallback;
+const MONTH_NUM: Record<string, number> = { Jan:1, Feb:2, Mar:3, Apr:4, May:5, Jun:6, Jul:7, Aug:8, Sep:9, Oct:10, Nov:11, Dec:12 };
+const getYearNum = (y: string) => parseInt(y.match(/\d{4}(?!.*\d{4})/)?.[0] ?? '0');
+const archiveProjects = (sanityArchive.length > 0 ? sanityArchive : archiveProjectsFallback)
+    .slice()
+    .sort((a, b) => {
+        const yd = getYearNum(b.year) - getYearNum(a.year);
+        if (yd !== 0) return yd;
+        return (MONTH_NUM[b.month ?? ''] ?? 0) - (MONTH_NUM[a.month ?? ''] ?? 0);
+    });
+
+// Group by year for the year-grouped rows layout
+const archiveByYear: { year: string; items: typeof archiveProjects }[] = [];
+for (const project of archiveProjects) {
+    const last = archiveByYear[archiveByYear.length - 1];
+    if (last && last.year === project.year) { last.items.push(project); }
+    else { archiveByYear.push({ year: project.year, items: [project] }); }
+}
 
 const courses = [
     { name: "Software Engineering", code: "CUS 1166", iconPath: "/src/assets/img/SE_icon.png" },
@@ -744,7 +760,7 @@ const courses = [
                         </div>
                         <h3 class="text-2xl font-black text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-300">Project Archive</h3>
                         <p class="text-slate-500 dark:text-slate-400 mt-3 text-sm leading-relaxed">
-                            A complete list of everything I've built — tools, experiments, and projects that didn't make the featured cut.
+                            A complete list of everything I've built: tools, experiments, and projects that didn't make the featured cut.
                         </p>
                     </div>
                     <div class="mt-6 pt-5 border-t border-slate-100 dark:border-slate-700 flex items-center justify-between">
@@ -756,7 +772,7 @@ const courses = [
 
             <div class="mt-10 text-center">
                 <button id="toggle-projects" class="inline-flex items-center gap-2 px-6 py-2.5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full font-bold text-sm text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all group">
-                    <span id="toggle-text">Show 2 more projects</span>
+                    <span id="toggle-text">Show more projects</span>
                     <i id="toggle-icon" class='bx bx-chevron-down text-lg group-hover:translate-y-0.5 transition-transform'></i>
                 </button>
             </div>
@@ -850,50 +866,55 @@ const courses = [
             <!-- Filter tabs -->
             <div class="px-8 pt-4 pb-2 flex gap-2 flex-shrink-0 border-b border-slate-100 dark:border-slate-800">
                 <button class="archive-filter-btn active-filter px-4 py-1.5 rounded-full text-xs font-bold transition-all" data-filter="all">All</button>
-                <button class="archive-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all" data-filter="extras">Not on Site</button>
+                <button class="archive-filter-btn px-4 py-1.5 rounded-full text-xs font-bold transition-all" data-filter="extras">Not Featured</button>
             </div>
 
-            <!-- Timeline -->
-            <div id="archive-scroll" class="overflow-y-auto flex-1 px-8 py-6 outline-none" tabindex="0">
-                <div class="relative">
-                    <!-- Vertical line -->
-                    <div class="absolute left-[4.5rem] top-2 bottom-2 w-px bg-slate-200 dark:bg-slate-700"></div>
-
-                    <div class="flex flex-col gap-0" id="archive-timeline">
-                        {archiveProjects.map((project) => (
-                            <div class="archive-item group relative flex gap-6 pb-8 last:pb-0" data-onsite={project.onSite ? "true" : "false"}>
-                                <!-- Year + dot -->
-                                <div class="flex-shrink-0 w-[4.5rem] flex flex-col items-end pt-1 gap-1.5">
-                                    <span class="text-[10px] font-mono font-bold text-slate-400 dark:text-slate-500 tabular-nums leading-none text-right">{project.month ? `${project.month} ${project.year}` : project.year}</span>
-                                    <div class="w-2.5 h-2.5 rounded-full bg-slate-300 dark:bg-slate-600 group-hover:bg-blue-500 dark:group-hover:bg-blue-400 transition-colors ring-2 ring-white dark:ring-slate-900 translate-x-[0.3rem]"></div>
-                                </div>
-                                <!-- Content -->
-                                <div class="flex-1 min-w-0 pt-0.5 pb-1">
-                                    <div class="flex items-start justify-between gap-3">
-                                        <div class="flex items-center gap-2 flex-wrap">
-                                            <p class="font-bold text-slate-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">{project.name}</p>
-                                            {project.onSite && (
-                                                <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full">On Site</span>
+            <!-- Year-grouped rows -->
+            <div id="archive-scroll" class="overflow-y-auto flex-1 outline-none" tabindex="0">
+                <div id="archive-timeline">
+                    {archiveByYear.map(({ year, items }) => (
+                        <div class="archive-year-group">
+                            <!-- Year header -->
+                            <div class="archive-year-header sticky top-0 z-10 px-8 py-2 bg-slate-50 dark:bg-slate-800/80 backdrop-blur-sm border-y border-slate-100 dark:border-slate-800">
+                                <span class="text-[11px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">{year}</span>
+                            </div>
+                            <!-- Rows -->
+                            <div class="divide-y divide-slate-100 dark:divide-slate-800/60">
+                                {items.map((project) => (
+                                    <div class="archive-item group flex gap-4 px-8 py-4 hover:bg-slate-50 dark:hover:bg-slate-800/30 transition-colors" data-onsite={project.onSite ? "true" : "false"}>
+                                        <!-- Month -->
+                                        <span class="flex-shrink-0 w-7 text-[11px] font-mono text-slate-400 dark:text-slate-500 pt-0.5">{project.month ?? ''}</span>
+                                        <!-- Content -->
+                                        <div class="flex-1 min-w-0">
+                                            <div class="flex items-start justify-between gap-3 mb-1">
+                                                <div class="flex items-center gap-2 flex-wrap">
+                                                    <p class="font-bold text-slate-900 dark:text-white text-sm group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors leading-snug">{project.name}</p>
+                                                    {project.onSite && (
+                                                        <span class="text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 rounded-full flex-shrink-0">Featured</span>
+                                                    )}
+                                                </div>
+                                                {project.link && (
+                                                    <a href={project.link} target="_blank" rel="noopener noreferrer" class="flex-shrink-0 text-slate-300 dark:text-slate-600 hover:text-blue-500 dark:hover:text-blue-400 transition-colors" aria-label={`${project.name} source`}>
+                                                        <i class='bx bx-link-external text-sm'></i>
+                                                    </a>
+                                                )}
+                                            </div>
+                                            {project.description && (
+                                                <p class="text-sm text-slate-500 dark:text-slate-400 leading-relaxed mb-2">{project.description}</p>
+                                            )}
+                                            {(project.tech ?? []).length > 0 && (
+                                                <div class="flex flex-wrap gap-1">
+                                                    {(project.tech ?? []).map((t) => (
+                                                        <span class="text-[9px] font-mono font-bold uppercase tracking-tight px-1.5 py-0.5 bg-slate-100 dark:bg-slate-700/80 text-slate-500 dark:text-slate-400 rounded">{t}</span>
+                                                    ))}
+                                                </div>
                                             )}
                                         </div>
-                                        {project.link && (
-                                            <a href={project.link} target="_blank" rel="noopener noreferrer" class="flex-shrink-0 mt-0.5 text-slate-300 dark:text-slate-600 hover:text-blue-500 dark:hover:text-blue-400 transition-colors" aria-label={`${project.name} source`}>
-                                                <i class='bx bx-link-external text-base'></i>
-                                            </a>
-                                        )}
                                     </div>
-                                    {project.description && (
-                                        <p class="text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed">{project.description}</p>
-                                    )}
-                                    <div class="flex flex-wrap gap-1.5 mt-2.5">
-                                        {project.tech.map((t) => (
-                                            <span class="text-[10px] font-mono font-bold uppercase tracking-tight px-2 py-0.5 bg-slate-100 dark:bg-slate-700/80 text-slate-500 dark:text-slate-400 rounded">{t}</span>
-                                        ))}
-                                    </div>
-                                </div>
+                                ))}
                             </div>
-                        ))}
-                    </div>
+                        </div>
+                    ))}
                 </div>
             </div>
         </div>
@@ -1221,11 +1242,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const filter = (btn as HTMLElement).dataset.filter;
             document.querySelectorAll('.archive-item').forEach(item => {
                 const el = item as HTMLElement;
-                if (filter === 'all') {
-                    el.style.display = '';
-                } else {
-                    el.style.display = el.dataset.onsite === 'true' ? 'none' : '';
-                }
+                el.style.display = filter === 'all' ? '' : (el.dataset.onsite === 'true' ? 'none' : '');
+            });
+            // Hide year group headers when all their rows are hidden
+            document.querySelectorAll('.archive-year-group').forEach(group => {
+                const el = group as HTMLElement;
+                const anyVisible = [...el.querySelectorAll<HTMLElement>('.archive-item')].some(i => i.style.display !== 'none');
+                el.style.display = anyVisible ? '' : 'none';
             });
         });
     });
