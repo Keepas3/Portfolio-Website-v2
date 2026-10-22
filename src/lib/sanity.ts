@@ -90,6 +90,29 @@ export async function getCertifications(): Promise<Certification[]> {
   }
 }
 
+export interface ArchiveProject {
+  name: string;
+  year: string;
+  month: string | null;
+  description: string | null;
+  tech: string[];
+  link: string | null;
+  onSite: boolean;
+}
+
+export async function getArchiveProjects(): Promise<ArchiveProject[]> {
+  try {
+    const results = await sanity.fetch<ArchiveProject[]>(
+      `*[_type == "archiveProject"] | order(order asc) {
+        name, year, month, description, tech, link, onSite
+      }`
+    );
+    return results ?? [];
+  } catch {
+    return [];
+  }
+}
+
 export async function getLiveProjects(): Promise<LiveProject[]> {
   try {
     const results = await sanity.fetch<LiveProject[]>(

@@ -1,6 +1,7 @@
 import {defineType, defineField} from 'sanity'
 import {liveProject} from './liveProject'
 import certification from './certification'
+import archiveProject from './archiveProject'
 
 const siteSettings = defineType({
   name: 'siteSettings',
@@ -48,4 +49,4 @@ const siteSettings = defineType({
   ],
 })
 
-export const schemaTypes = [siteSettings, liveProject, certification]
+export const schemaTypes = [siteSettings, liveProject, certification, archiveProject]

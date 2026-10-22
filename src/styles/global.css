@@ -55,6 +55,32 @@
     z-index: 10;
 }
 
+.archive-filter-btn {
+    background: transparent;
+    color: #94a3b8;
+    border: 1px solid transparent;
+}
+.archive-filter-btn:hover {
+    color: #475569;
+    background: #f1f5f9;
+}
+.archive-filter-btn.active-filter {
+    background: #1e293b;
+    color: #fff;
+    border-color: transparent;
+}
+:is(.dark) .archive-filter-btn {
+    color: #64748b;
+}
+:is(.dark) .archive-filter-btn:hover {
+    color: #cbd5e1;
+    background: #1e293b;
+}
+:is(.dark) .archive-filter-btn.active-filter {
+    background: #f8fafc;
+    color: #0f172a;
+}
+
 #modal-gallery img {
     flex: 0 0 100%; /* Forces one image per "slide" */
     width: 100%;
