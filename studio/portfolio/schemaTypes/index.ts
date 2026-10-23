@@ -35,16 +35,22 @@ const siteSettings = defineType({
       description: 'Each item becomes one paragraph in the About Me section.',
     }),
     defineField({
-      name: 'coreLanguages',
-      title: 'Core Languages',
+      name: 'projectsBuilt',
+      title: 'Projects Built (stat counter)',
       type: 'string',
-      description: 'Comma-separated list shown under "Core Languages", e.g. "Python, Java, C++"',
+      description: 'Number shown on the stat counter, e.g. "20+"',
     }),
     defineField({
-      name: 'projectsBuilt',
-      title: 'Projects Built',
+      name: 'languagesCount',
+      title: 'Languages (stat counter)',
       type: 'string',
-      description: 'The number shown above "Projects Built", e.g. "9+"',
+      description: 'Number shown on the stat counter, e.g. "8+"',
+    }),
+    defineField({
+      name: 'techToolsCount',
+      title: 'Tech Tools (stat counter)',
+      type: 'string',
+      description: 'Number shown on the stat counter, e.g. "16+"',
     }),
   ],
 })

@@ -16,8 +16,9 @@ export interface SiteSettings {
   resumeUrl: string | null;
   aboutHeadline: string | null;
   aboutParagraphs: string[] | null;
-  coreLanguages: string | null;
   projectsBuilt: string | null;
+  languagesCount: string | null;
+  techToolsCount: string | null;
 }
 
 export async function getSiteSettings(): Promise<SiteSettings> {
@@ -26,29 +27,33 @@ export async function getSiteSettings(): Promise<SiteSettings> {
       resumeUrl: string | null;
       aboutHeadline: string | null;
       aboutParagraphs: string[] | null;
-      coreLanguages: string | null;
       projectsBuilt: string | null;
+      languagesCount: string | null;
+      techToolsCount: string | null;
     } | null>(`*[_type == "siteSettings"][0]{
       "resumeUrl": resume.asset->url,
       aboutHeadline,
       aboutParagraphs,
-      coreLanguages,
-      projectsBuilt
+      projectsBuilt,
+      languagesCount,
+      techToolsCount
     }`);
     return {
       resumeUrl: result?.resumeUrl ?? null,
       aboutHeadline: result?.aboutHeadline ?? null,
       aboutParagraphs: result?.aboutParagraphs ?? null,
-      coreLanguages: result?.coreLanguages ?? null,
       projectsBuilt: result?.projectsBuilt ?? null,
+      languagesCount: result?.languagesCount ?? null,
+      techToolsCount: result?.techToolsCount ?? null,
     };
   } catch {
     return {
       resumeUrl: null,
       aboutHeadline: null,
       aboutParagraphs: null,
-      coreLanguages: null,
       projectsBuilt: null,
+      languagesCount: null,
+      techToolsCount: null,
     };
   }
 }

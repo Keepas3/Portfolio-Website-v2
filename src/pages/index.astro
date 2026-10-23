@@ -22,8 +22,9 @@ const aboutParagraphs = settings.aboutParagraphs ?? [
   'Outside of work and academics, I enjoy travelling, reading an interesting book, or playing a game of chess. Fun fact I play chess competitively in clubs & tournaments in New York. I\'m a big believer in staying active and using sports to keep my competitive edge sharp.',
   'My work spans full-stack development, AI-powered tooling, cloud infrastructure, and automation — check out my projects below to see it in action. I\'m always open to connecting about software engineering, AI/ML, IT, or any opportunity to make an impact.',
 ];
-const coreLanguages = settings.coreLanguages ?? 'Python, Java, C++, JavaScript, TypeScript, C, SQL, Rust';
 const projectsBuilt = settings.projectsBuilt ?? '20+';
+const languagesCount = settings.languagesCount ?? '8+';
+const techToolsCount = settings.techToolsCount ?? '16+';
 
 const myProjects = [
     {
@@ -582,13 +583,13 @@ const courses = [
                         </div>
                         <div class="text-center sm:text-left">
                             <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
-                                <span class="stat-counter" data-count-to="8" data-count-suffix="+">0</span>
+                                <span class="stat-counter" data-count-to={parseInt(languagesCount) || 8} data-count-suffix="+">0</span>
                             </p>
                             <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Languages</p>
                         </div>
                         <div class="text-center sm:text-left">
                             <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
-                                <span class="stat-counter" data-count-to="16" data-count-suffix="+">0</span>
+                                <span class="stat-counter" data-count-to={parseInt(techToolsCount) || 16} data-count-suffix="+">0</span>
                             </p>
                             <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Tech Tools</p>
                         </div>
