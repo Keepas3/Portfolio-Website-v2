@@ -576,7 +576,7 @@ const courses = [
                     <div class="grid grid-cols-3 gap-6 mt-10 border-t border-slate-100 dark:border-slate-800 pt-8 transition-colors duration-300">
                         <div class="text-center sm:text-left">
                             <p class="text-3xl font-black text-slate-900 dark:text-white transition-colors duration-300">
-                                <span class="stat-counter" data-count-to="9" data-count-suffix="+">0</span>
+                                <span class="stat-counter" data-count-to={parseInt(projectsBuilt) || 9} data-count-suffix="+">0</span>
                             </p>
                             <p class="text-xs uppercase tracking-wide text-slate-400 dark:text-slate-500 font-bold mt-1">Projects Built</p>
                         </div>
