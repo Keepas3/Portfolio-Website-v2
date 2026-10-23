@@ -9,7 +9,7 @@ export const sanity = createClient({
     import.meta.env.SANITY_DATASET ||
     'production',
   apiVersion: '2024-01-01',
-  useCdn: true,
+  useCdn: false,
 });
 
 export interface SiteSettings {
