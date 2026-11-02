@@ -57,8 +57,14 @@ export default defineType({
     }),
     defineField({
       name: 'link',
-      title: 'Link (GitHub or Live)',
+      title: 'GitHub Link',
       type: 'url',
+    }),
+    defineField({
+      name: 'siteLink',
+      title: 'Live Site / Download Link',
+      type: 'url',
+      description: 'Optional — website, demo, or download URL shown as a globe icon.',
     }),
     defineField({
       name: 'onSite',

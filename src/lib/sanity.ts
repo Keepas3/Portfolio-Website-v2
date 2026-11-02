@@ -102,6 +102,7 @@ export interface ArchiveProject {
   description: string | null;
   tech: string[];
   link: string | null;
+  siteLink?: string | null;
   onSite: boolean;
 }
 
@@ -109,7 +110,7 @@ export async function getArchiveProjects(): Promise<ArchiveProject[]> {
   try {
     const results = await sanity.fetch<ArchiveProject[]>(
       `*[_type == "archiveProject"] {
-        name, year, month, description, "tech": coalesce(tech, []), link, onSite
+        name, year, month, description, "tech": coalesce(tech, []), link, siteLink, onSite
       }`
     );
     return results ?? [];
