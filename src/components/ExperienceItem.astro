@@ -7,17 +7,15 @@ interface Props {
   company: string;
   location: string;
   date: string;
-  logo: string;
+  logo?: string;
   bullets: string[];
 }
 
 const { title, company, location, date, logo, bullets } = Astro.props;
 
-// This is the "Magic" part: It finds all images in your assets folder
 const images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/img/*.{jpeg,jpg,png,gif}');
 
-// We check if the logo path provided in your index.astro exists in our assets
-if (!images[logo]) throw new Error(`"${logo}" does not exist in glob: "src/assets/img/*.{jpeg,jpg,png,gif}"`);
+if (logo && !images[logo]) throw new Error(`"${logo}" does not exist in glob: "src/assets/img/*.{jpeg,jpg,png,gif}"`);
 ---
 
 <div class="relative pl-8 pb-12 border-l-2 border-slate-200 dark:border-slate-700 last:border-0 last:pb-0 transition-colors duration-300">
